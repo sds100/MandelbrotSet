@@ -1,2 +1,2 @@
 # MandelbrotSet
-A C# .NET to create Mandelbrot Sets.
+A C# Windows Forms application to create Mandelbrot Sets.
