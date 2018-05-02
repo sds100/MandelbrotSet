@@ -1,3 +1,0 @@
-# Help
-
-## Understanding Complex Numbers
