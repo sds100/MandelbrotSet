@@ -130,20 +130,20 @@ namespace MandelbrotSet
             int bitmapWidth = bitmapSize.Width;
             int bitmapHeight = bitmapSize.Height;
 
-            // converts the pixel coordinate to the equivalent coordinate on the specified plane.
+            /* converts the pixel coordinate to the equivalent coordinate on the given 
+             * portion of the complex plane. */
+
             double c_real = ((pixelCoords.X - bitmapWidth / 2) * planeWidth / bitmapWidth)
                 + planeCentre.X;
 
             double c_im = ((pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
                 + planeCentre.Y;
 
-            /* If you don't understand this code Look at the README. By using ComplexNumber classes
-             * it is less daunting and easier to understand. */
+            // If you don't understand this code Look at the README.
             double z_real = 0;
             double z_im = 0;
             
             int iteration = 0;
-
             
             while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
             {

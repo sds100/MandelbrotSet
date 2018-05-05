@@ -14,7 +14,9 @@ namespace MandelbrotSet
     {
         /// <summary>
         /// Default length of one axis.
-        /// For example: If the x axis goes from -4 to 4, it has a length of 8
+        /// For example: If the x axis goes from -2 to 2, it has a length of 8
+        ///
+        /// The default is 4 because the entier Mandelbrot Set lies within a circle with radius of 2.
         /// </summary>
         private const double DEFAULT_AXIS_LENGTH = 4;
 
