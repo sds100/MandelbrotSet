@@ -5,8 +5,9 @@ A C# Windows Forms application to create Mandelbrot Sets.
 - [ ] Add rulers to the bottom and left side.
 - [ ] Export .png image of a user desired portion of the Mandelbrot Set with a custom resolution  
   
-## Understanding the code
-> ## What is a complex number?
+## Understanding the code  
+
+> ### What is a complex number?
 > A complex number is a number expressed in the form a + bi where *a* and *b* are real numbers and *i* is an "imaginary number". For example 7 + 3*i* where *i* could be ![](https://latex.codecogs.com/svg.latex?\sqrt{-1})
 
 ```c#
@@ -31,7 +32,7 @@ A C# Windows Forms application to create Mandelbrot Sets.
 
       iteration++;
   }
-```
+```  
 
 ### How do you multiply complex numbers?
 For example, If we multiply out these brackets and simplify where *i* = ![](https://latex.codecogs.com/svg.latex?%5Cinline%20%5Csqrt%7B-1%7D)
