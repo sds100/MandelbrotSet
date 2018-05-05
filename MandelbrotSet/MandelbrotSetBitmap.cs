@@ -137,13 +137,14 @@ namespace MandelbrotSet
             double c_im = ((pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
                 + planeCentre.Y;
 
-            /* Look at .... to better understand what is happening. By using ComplexNumber classes
+            /* If you don't understand this code Look at the README. By using ComplexNumber classes
              * it is less daunting and easier to understand. */
             double z_real = 0;
             double z_im = 0;
             
             int iteration = 0;
 
+            
             while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
             {
                 double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
