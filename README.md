@@ -11,13 +11,13 @@ A C# Windows Forms application to create Mandelbrot Sets.
 > A complex number is a number expressed in the form a + bi where *a* and *b* are real numbers and *i* is an "imaginary number". For example 7 + 3*i* where *i* could be ![](https://latex.codecogs.com/svg.latex?\sqrt{-1})
 
 ```c#
+  // Convert the pixel coordinate to the equivalent coordinate on the given portion of the complex plane.
   double c_real = ((pixelCoords.X - bitmapWidth / 2) * planeWidth / bitmapWidth)
       + planeCentre.X;
 
   double c_im = ((pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
       + planeCentre.Y;
 
-  // If you don't understand this code Look at the README.
   double z_real = 0;
   double z_im = 0;
 
@@ -32,7 +32,29 @@ A C# Windows Forms application to create Mandelbrot Sets.
 
       iteration++;
   }
-```  
+```
+
+### Using a ComplexNumber class
+```c#
+  // Convert the pixel coordinate to the equivalent coordinate on the given portion of the complex plane.
+  double c_real = ((pixelCoords.X - bitmapWidth / 2) * planeWidth / bitmapWidth)
+      + planeCentre.X;
+
+  double c_im = ((pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
+      + planeCentre.Y;
+
+  var z = new ComplexNumber(0,0);
+  var c = new ComplexNumber(c_real, c_im);
+            
+  int iteration = 0;
+  
+  while (z.Normal < 4 && iteration < MAX_ITERATIONS)
+  {
+      z = z * z + c;
+
+      iteration++;
+  }
+```
 
 ### How do you multiply complex numbers?
 For example, If we multiply out these brackets and simplify where *i* = ![](https://latex.codecogs.com/svg.latex?%5Cinline%20%5Csqrt%7B-1%7D)
