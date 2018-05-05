@@ -58,7 +58,6 @@
     </Compile>
     <Compile Include="MandelPlane.cs" />
     <Compile Include="Presenter.cs" />
-    <Compile Include="Help.cs" />
     <Compile Include="MandelbrotSetBitmap.cs" />
     <Compile Include="PointD.cs" />
     <Compile Include="Program.cs" />
