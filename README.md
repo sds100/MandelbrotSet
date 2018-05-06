@@ -10,6 +10,9 @@ A C# Windows Forms application to create Mandelbrot Sets.
 > ### What is a complex number?
 > A complex number is a number expressed in the form a + bi where *a* and *b* are real numbers and *i* is an "imaginary number". For example 7 + 3*i* where *i* could be ![](https://latex.codecogs.com/svg.latex?\sqrt{-1})
 
+> ### The algorithm
+> ![](https://latex.codecogs.com/svg.latex?z_%7Bn&plus;1%7D%20%3D%20z_%7Bn%7D%5E%7B2%7D%20&plus;%20c)
+
 ```c#
   // Convert the pixel coordinate to the equivalent coordinate on the given portion of the complex plane.
   double c_real = ((pixelCoords.X - bitmapWidth / 2) * planeWidth / bitmapWidth)
