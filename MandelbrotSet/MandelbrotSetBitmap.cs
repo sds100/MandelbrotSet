@@ -60,8 +60,8 @@ namespace MandelbrotSet
                         //iterate through each column in the row.
                         for (int column = 0; column < bitmapSize.Width; column++)
                         {
-                            /* since it is multi-threaded, nextRow maybe increased although the whole image 
-                             * has been drawn. */
+                            /* since it is multi-threaded, nextRow maybe increased although
+                             * the whole image has been drawn. */
                             if (thisRow >= bitmapSize.Height) break;
 
                             var pixel = CalculatePixel(
@@ -114,6 +114,7 @@ namespace MandelbrotSet
 
         /// <summary>
         /// Uses the Mandelbrot Set algorithm to determine what color a pixel should be.
+        /// Look at the README if you don't understand this code.
         /// </summary>
         /// <param name="bitmapSize"></param>
         /// <param name="plane"></param>
@@ -133,13 +134,14 @@ namespace MandelbrotSet
             /* converts the pixel coordinate to the equivalent coordinate on the given 
              * portion of the complex plane. */
 
+            // the real part of C will be the X coordinate
             double c_real = ((pixelCoords.X - bitmapWidth / 2) * planeWidth / bitmapWidth)
                 + planeCentre.X;
 
+            // the imaginary part of C will be the Y coordinate
             double c_im = ((pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
                 + planeCentre.Y;
-
-            // If you don't understand this code Look at the README.
+            
             double z_real = 0;
             double z_im = 0;
             
