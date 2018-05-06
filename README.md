@@ -32,9 +32,10 @@ A C# Windows Forms application to create Mandelbrot Sets.
   
   while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
   {
-```
-> Create a temporary variable for the real part of z because the current iteration of z is needed to calculate the imaginary part of z
-```c#  
+  
+  /* Create a temporary variable for the real part of z because the current iteration of z is needed to calculate the imaginary  
+   * part of z */
+  
       double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
 
       z_im = 2 * z_real * z_im + c_im;
