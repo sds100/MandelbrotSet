@@ -14,35 +14,42 @@ A C# Windows Forms application to create Mandelbrot Sets.
 > ![](https://latex.codecogs.com/svg.latex?z_%7Bn&plus;1%7D%20%3D%20z_%7Bn%7D%5E%7B2%7D%20&plus;%20c)  
 > *c* and *z* are complex numbers.
 
+### How do you write the algorithm in code?
+In the following example, *i* = ![](https://latex.codecogs.com/svg.latex?%5Csqrt%7B-1%7D).
+IGNORE i in code
 ```c#
-  // Convert the pixel coordinate to the equivalent coordinate on the given portion of the complex plane.
-  
-  // the real part of C will be the X coordinate
-  double c_real = ((pixelCoords.X - bitmapWidth / 2) * planeWidth / bitmapWidth)
-      + planeCentre.X;
+      while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
+      {
+        double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
 
-  // the imaginary part of C will be the Y coordinate
-  double c_im = ((pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
-      + planeCentre.Y;
-
-  double z_real = 0;
-  double z_im = 0;
-
-  int iteration = 0;
-  
-  while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
-  {
-  /* Create a temporary variable for the real part of z because the current iteration
-   * of z is needed to calculate the imaginary part of z */
- 
-      double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
-
-      z_im = 2 * z_real * z_im + c_im;
-      z_real = z_real_tmp;
-
-      iteration++;
-  }
+        z_im = 2 * z_real * z_im + c_im;
+        z_real = z_real_tmp;
+      }
 ```
+
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is derived from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D).  
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is derived from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
+
+For example, where ![](https://latex.codecogs.com/svg.latex?Z_%7B1%7D) (the first iteration of Z) and C are ![](https://latex.codecogs.com/svg.latex?%283%20&plus;%204i%29)...
+
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3Dz%7B_%7B1%7D%7D%5E%7B2%7D&plus;c)  
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D%283&plus;4i%29%5E2%20&plus;%20%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D%283&plus;4i%29%283&plus;4i%29%20&plus;%20%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D9&plus;12i&plus;12i&plus;16i%5E2%20&plus;%20%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D9&plus;24i&plus;16i%5E2%20&plus;%20%283&plus;4i%29)  
+
+![](https://latex.codecogs.com/svg.latex?16i%5E2%20%3D%20-16) because...  
+![](https://latex.codecogs.com/svg.latex?16i%5E2%20%3D%2016%5Csqrt%7B-1%7D%5E2)  
+![](https://latex.codecogs.com/svg.latex?%3D%2016%20*%20-1)  
+![](https://latex.codecogs.com/svg.latex?%3D%20-16)  
+
+Therefore...  
+
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%209%20&plus;%2024i%20-16%20&plus;%20%283&plus;%204i%29)
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%20-7%20&plus;%2024i%20&plus;%20%283&plus;%204i%29)
+![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%20-7%20&plus;%2024i%20&plus;%203&plus;%204i)
+![]()
+
 
 ### Using a ComplexNumber class
 ```c#
@@ -66,7 +73,7 @@ A C# Windows Forms application to create Mandelbrot Sets.
   }
 ```
 
-### How do you multiply complex numbers?
+### How do you multiply two complex numbers?
 For example, If we multiply out these brackets and simplify where *i* = ![](https://latex.codecogs.com/svg.latex?%5Cinline%20%5Csqrt%7B-1%7D)
 
 ![](https://latex.codecogs.com/svg.latex?%5Cinline%20%284%20&plus;%203i%29%282%20&plus;%202i%29)  
@@ -85,4 +92,4 @@ Therefore...
 = ![](https://latex.codecogs.com/svg.latex?%5Cinline%202%20&plus;%2014i)
 
 There we go!  
-![](https://latex.codecogs.com/svg.latex?%5Cinline%20%284%20&plus;%203i%29%282%20&plus;%202i%29) = ![](https://latex.codecogs.com/svg.latex?%5Cinline%202%20&plus;%2014i)  
+![](https://latex.codecogs.com/svg.latex?%5Cinline%20%284%20&plus;%203i%29%282%20&plus;%202i%29) = ![](https://latex.codecogs.com/svg.latex?%5Cinline%202%20&plus;%2014i)
