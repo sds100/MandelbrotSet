@@ -48,7 +48,8 @@ Therefore...
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D9&plus;24i-16&plus;%283&plus;4i%29)  
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D-7&plus;24i&plus;%283&plus;4i%29)  
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D-7&plus;24i&plus;3&plus;4i)  
-![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D28i-4)
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D-4&plus;28i)
+
 
 
 ### Using a ComplexNumber class
@@ -93,3 +94,5 @@ Therefore...
 
 There we go!  
 ![](https://latex.codecogs.com/svg.latex?%5Cinline%20%284%20&plus;%203i%29%282%20&plus;%202i%29) = ![](https://latex.codecogs.com/svg.latex?%5Cinline%202%20&plus;%2014i)
+
+
