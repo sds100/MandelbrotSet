@@ -1,11 +1,13 @@
 # MandelbrotSet
-A C# Windows Forms application to create Mandelbrot Sets.  
+A C# Windows Forms application to view the Mandelbrot Set.  
   
 ## Roadmap
 - [ ] Add rulers to the bottom and left side.
 - [ ] Export .png image of a user desired portion of the Mandelbrot Set with a custom resolution  
   
 ## Understanding the code  
+
+This is mainly for me so if I ever come back to this project, I can understand what my crazy mind was thinking. You can also read it to learn (maybe) about complex numbers and the Mandelbrot Set. 
 
 > ### What is a complex number?
 > A complex number is a number expressed in the form a + bi where *a* and *b* are real numbers and *i* is an "imaginary number". For example 7 + 3*i* where *i* could be ![](https://latex.codecogs.com/svg.latex?\sqrt{-1})
@@ -38,7 +40,9 @@ Therefore...
 
 ### How do you write the algorithm in code?
 
-The type of variable you choose to store Z and C as massively affects how far you can zoom in before bands start appearing down the screen. This happens because the limits of floating point precision are met. By using BigDecimal (in C#), you can overcome this but it is MUCH slower.
+The type of variable we choose to store Z and C as massively affects how far we can zoom in before bands start appearing down the screen. This happens because the limits of floating point precision are met. By using BigDecimal (in C#), we can overcome this but it is MUCH slower.
+
+*i* can be represented by it's coefficient.
 
 ```c#
     while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
@@ -51,8 +55,8 @@ The type of variable you choose to store Z and C as massively affects how far yo
 ```
 
 ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is calculated from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D) because...  
-
-
+  
+I don't know *WHY* it works but it does.
 
 ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is calculated from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
 
