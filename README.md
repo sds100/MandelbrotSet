@@ -37,7 +37,8 @@ Therefore...
 ![](https://latex.codecogs.com/svg.latex?%28-4&plus;28i%29) is then substituted back into the formula.
 
 ### How do you write the algorithm in code?
-You can choose to create a complex number class but it is significantly slower.  
+
+The type of variable you choose to store Z and C as massively affects how far you can zoom in before bands start appearing down the screen. This happens because the limits of floating point precision are met. By using BigDecimal (in C#), you can overcome this but it is MUCH slower.
 
 ```c#
     while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
@@ -49,8 +50,11 @@ You can choose to create a complex number class but it is significantly slower.
     }
 ```
 
-![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is derived from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D).  
-![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is derived from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is calculated from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D) because...  
+
+
+
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is calculated from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
 
 ### Using a ComplexNumber class
 ```c#
