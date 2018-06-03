@@ -11,8 +11,8 @@ A C# Windows Forms application to create Mandelbrot Sets.
 > A complex number is a number expressed in the form a + bi where *a* and *b* are real numbers and *i* is an "imaginary number". For example 7 + 3*i* where *i* could be ![](https://latex.codecogs.com/svg.latex?\sqrt{-1})
 
 > ### The algorithm
-> ![](https://latex.codecogs.com/svg.latex?z_%7Bn&plus;1%7D%20%3D%20z_%7Bn%7D%5E%7B2%7D%20&plus;%20c)  
-> *c* and *z* are complex numbers.
+> ![](https://latex.codecogs.com/svg.latex?Z_%7Bn&plus;1%7D%3DZ_%7Bn%7D%5E%7B2%7D&plus;C)  
+> *Z* and *C* are complex numbers.
 
 ### How do you write the algorithm in code?
 In the following example, *i* = ![](https://latex.codecogs.com/svg.latex?%5Csqrt%7B-1%7D).
