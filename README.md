@@ -15,8 +15,8 @@ A C# Windows Forms application to create Mandelbrot Sets.
 > *Z* and *C* are complex numbers.
 
 ### How do you write the algorithm in code?
-In the following example, *i* = ![](https://latex.codecogs.com/svg.latex?%5Csqrt%7B-1%7D).
-IGNORE i in code
+You can choose to create a complex number class but it is significantly slower. In the following example, *i* = ![](https://latex.codecogs.com/svg.latex?%5Csqrt%7B-1%7D).
+
 ```c#
       while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
       {
