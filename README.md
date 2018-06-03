@@ -34,9 +34,9 @@ For example, where ![](https://latex.codecogs.com/svg.latex?Z_%7B1%7D) (the firs
 
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3DZ_%7B1%7D%5E%7B2%7D%20&plus;%20C)  
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D%283&plus;4i%29%5E%7B2%7D%20&plus;%20%283&plus;4i%29)  
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D%283&plus;4i%29%283&plus;4i%29%20&plus;%20%283&plus;4i%29)  
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D9&plus;12i&plus;12i&plus;16i%5E2%20&plus;%20%283&plus;4i%29)  
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D9&plus;24i&plus;16i%5E2%20&plus;%20%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D%283&plus;4i%29%283&plus;4i%29%20&plus;%20%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D9&plus;12i&plus;12i&plus;16i%5E%7B2%7D&plus;%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D9&plus;24i&plus;16i%5E%7B2%7D&plus;%283&plus;4i%29)  
 
 ![](https://latex.codecogs.com/svg.latex?16i%5E2%20%3D%20-16) because...  
 ![](https://latex.codecogs.com/svg.latex?16i%5E2%20%3D%2016%5Csqrt%7B-1%7D%5E2)  
@@ -45,7 +45,7 @@ For example, where ![](https://latex.codecogs.com/svg.latex?Z_%7B1%7D) (the firs
 
 Therefore...  
 
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%209%20&plus;%2024i%20-16%20&plus;%20%283&plus;%204i%29)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D9&plus;24i-16&plus;%283&plus;4i%29)  
 ![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%20-7%20&plus;%2024i%20&plus;%20%283&plus;%204i%29)  
 ![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%20-7%20&plus;%2024i%20&plus;%203&plus;%204i)  
 ![]()
