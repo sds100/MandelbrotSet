@@ -46,9 +46,9 @@ For example, where ![](https://latex.codecogs.com/svg.latex?Z_%7B1%7D) (the firs
 Therefore...  
 
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D9&plus;24i-16&plus;%283&plus;4i%29)  
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%20-7%20&plus;%2024i%20&plus;%20%283&plus;%204i%29)  
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%20%3D%20-7%20&plus;%2024i%20&plus;%203&plus;%204i)  
-![]()
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D-7&plus;24i&plus;%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D-7&plus;24i&plus;3&plus;4i)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D28i-4)
 
 
 ### Using a ComplexNumber class
