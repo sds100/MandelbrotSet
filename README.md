@@ -32,8 +32,8 @@ IGNORE i in code
 
 For example, where ![](https://latex.codecogs.com/svg.latex?Z_%7B1%7D) (the first iteration of Z) and C are ![](https://latex.codecogs.com/svg.latex?%283%20&plus;%204i%29)...
 
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3Dz%7B_%7B1%7D%7D%5E%7B2%7D&plus;c)  
-![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D%283&plus;4i%29%5E2%20&plus;%20%283&plus;4i%29)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3DZ_%7B1%7D%5E%7B2%7D%20&plus;%20C)  
+![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D%283&plus;4i%29%5E%7B2%7D%20&plus;%20%283&plus;4i%29)  
 ![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D%283&plus;4i%29%283&plus;4i%29%20&plus;%20%283&plus;4i%29)  
 ![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D9&plus;12i&plus;12i&plus;16i%5E2%20&plus;%20%283&plus;4i%29)  
 ![](https://latex.codecogs.com/svg.latex?z_%7B2%7D%3D9&plus;24i&plus;16i%5E2%20&plus;%20%283&plus;4i%29)  
