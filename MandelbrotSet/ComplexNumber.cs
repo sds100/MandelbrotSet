@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MandelbrotSet
 {
     /// <summary>
-    /// Represents a complex number. See .... for a more thorough explanation.
+    /// Represents a complex number.
     /// </summary>
     struct ComplexNumber
     {
@@ -35,7 +35,7 @@ namespace MandelbrotSet
         }
 
         /// <summary>
-        /// Add two complex numbers together. See .... for how it works.
+        /// Add two complex numbers together.
         /// </summary>
         /// <returns>A complex number that is the sum of the two inputted complex numbers</returns>
         public static ComplexNumber operator +(ComplexNumber x, ComplexNumber y)
