@@ -14,22 +14,6 @@ A C# Windows Forms application to create Mandelbrot Sets.
 > ![](https://latex.codecogs.com/svg.latex?Z_%7Bn&plus;1%7D%3DZ_%7Bn%7D%5E%7B2%7D&plus;C)  
 > *Z* and *C* are complex numbers.
 
-### How do you write the algorithm in code?
-You can choose to create a complex number class but it is significantly slower. In the following example, *i* = ![](https://latex.codecogs.com/svg.latex?%5Csqrt%7B-1%7D).
-
-```c#
-      while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
-      {
-        double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
-
-        z_im = 2 * z_real * z_im + c_im;
-        z_real = z_real_tmp;
-      }
-```
-
-![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is derived from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D).  
-![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is derived from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
-
 For example, where ![](https://latex.codecogs.com/svg.latex?Z_%7B1%7D) (the first iteration of Z) and C are ![](https://latex.codecogs.com/svg.latex?%283%20&plus;%204i%29)...
 
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3DZ_%7B1%7D%5E%7B2%7D%20&plus;%20C)  
@@ -50,7 +34,23 @@ Therefore...
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D-7&plus;24i&plus;3&plus;4i)  
 ![](https://latex.codecogs.com/svg.latex?Z_%7B2%7D%3D-4&plus;28i)
 
+![](https://latex.codecogs.com/svg.latex?%28-4&plus;28i%29) is then substituted back into the formula.
 
+### How do you write the algorithm in code?
+You can choose to create a complex number class but it is significantly slower.  
+
+```c#
+    while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
+    {
+      double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
+
+      z_im = 2 * z_real * z_im + c_im;
+      z_real = z_real_tmp;
+    }
+```
+
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is derived from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D).  
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is derived from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
 
 ### Using a ComplexNumber class
 ```c#
