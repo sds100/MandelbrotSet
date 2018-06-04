@@ -33,11 +33,21 @@ namespace MandelbrotSet
         /// <see cref="labelTime"/>.
         /// </summary>
         public long CalculationTime { set => labelTime.Text = $"{value} ms"; }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        double IForm.Width { set => labelWidth.Text = $"Width: {value}"; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        double IForm.Height { set => labelHeight.Text = $"Height: {value}"; }
+
         /// <summary>
         /// Calculates the aspect-ratio of <see cref="pictureBox"/> 
         /// </summary>
-        private double AspectRatio => (double) pictureBox.Width / pictureBox.Height;
+        private double AspectRatio => (double)pictureBox.Width / pictureBox.Height;
 
         /// <summary>
         /// The rectangle which follows the cursor. It is used to select where the user wants to
@@ -49,7 +59,7 @@ namespace MandelbrotSet
         /// Stores the coordinates of the cursor
         /// </summary>
         private Point cursorLocation;
-        
+
         private IPresenter presenter;
 
         public MainForm()
@@ -74,8 +84,8 @@ namespace MandelbrotSet
             SetRectangleSizeToAspectRatio();
             presenter.Resize(pictureBox.Size);
         }
-            
-        private void PictureBox_MouseMove(object sender, MouseEventArgs e) 
+
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             cursorLocation = e.Location;
             MoveRectangleToCursor();
@@ -95,11 +105,11 @@ namespace MandelbrotSet
             {
                 ChangeRectangleSize(-RECT_SIZE_STEP_PX);
             }
-            
+
             //since the size of the rectangle has changed, it must be centred over the cursor
             MoveRectangleToCursor();
         }
-        
+
         private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -171,6 +181,5 @@ namespace MandelbrotSet
             //redraw the PictureBox so the rectangle is drawn in the new position
             pictureBox.Refresh();
         }
-
     }
 }

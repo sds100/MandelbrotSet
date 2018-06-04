@@ -11,5 +11,7 @@ namespace MandelbrotSet
     {
         Bitmap MandelbrotSet { set; }
         long CalculationTime { set; }
+        double Width { set; }
+        double Height { set; }
     }
 }

@@ -46,6 +46,69 @@ namespace MandelbrotSet
                 MandelPlane.DEFAULT_FOCUS_POINT));
         }
 
+        public void DrawInitialMandelbrotSet(Size bitmapSize)
+        {
+            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(
+                bitmapSize,
+                new MandelPlane(MandelPlane.DEFAULT_AXIS_LENGTHS,
+                                MandelPlane.DEFAULT_FOCUS_POINT)));
+
+            Form.Width = MandelPlane.DEFAULT_AXIS_LENGTHS.X;
+            Form.Height = MandelPlane.DEFAULT_AXIS_LENGTHS.Y;
+        }
+
+        /// <summary>
+        /// Redraw the current Mandelbrot Set with a different size but keep it's visible portion
+        /// of the plane the same.
+        /// </summary>
+        /// <param name="newBitmapSize"> The new size of the Mandelbrot Set</param>
+        public void Resize(Size newBitmapSize)
+        {
+            var plane = PlaneHistory.Last();
+
+            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(
+                newBitmapSize,
+                plane));
+
+            Form.Width = plane.Width;
+            Form.Height = plane.Height;
+        }
+
+        /// <summary>
+        /// Moves and zooms to the selected part of the plane.
+        /// </summary>
+        /// <param name="bitmapSize">The size of the image to create</param>
+        /// <param name="rectangleSize">The size of the selected area of the current image</param>
+        /// <param name="cursorLocation">The location of the cursor on the current image</param>
+        public void ZoomToSelectedArea(Size bitmapSize, Size rectangleSize, Point cursorLocation)
+        {
+            var newAxisLengths = CalculateAxisLengths(bitmapSize, rectangleSize);
+            var newFocusPoint = ConvertBitmapPointToGraphPoint(cursorLocation, bitmapSize);
+
+            var plane = new MandelPlane(newAxisLengths, newFocusPoint);
+            PlaneHistory.Add(plane);
+
+            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
+
+            Form.Width = plane.Width;
+            Form.Height = plane.Height;
+        }
+
+        /// <summary>
+        /// Redraws the previous Mandelbrot Set.
+        /// </summary>
+        /// <param name="bitmapSize">The size of the image to create</param>
+        public void ShowPreviousPlane(Size bitmapSize)
+        {
+            PlaneHistory.Remove(PlaneHistory.Last());
+
+            var plane = PlaneHistory.Last();
+            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
+
+            Form.Width = plane.Width;
+            Form.Height = plane.Height;
+        }
+        
         /// <summary>
         /// Create a Mandelbrot Set then show it to the user asynchronously.
         /// </summary>
@@ -75,54 +138,6 @@ namespace MandelbrotSet
             Form.CalculationTime = after - before;
         }
 
-        public void DrawInitialMandelbrotSet(Size bitmapSize)
-        {
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(
-                bitmapSize,
-                new MandelPlane(MandelPlane.DEFAULT_AXIS_LENGTHS,
-                                MandelPlane.DEFAULT_FOCUS_POINT)));
-        }
-
-        /// <summary>
-        /// Redraw the current Mandelbrot Set with a different size but keep it's visible portion
-        /// of the plane the same.
-        /// </summary>
-        /// <param name="newBitmapSize"> The new size of the Mandelbrot Set</param>
-        public void Resize(Size newBitmapSize)
-        {
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(
-                newBitmapSize,
-                PlaneHistory.Last()));
-        }
-
-        /// <summary>
-        /// Moves and zooms to the selected part of the plane.
-        /// </summary>
-        /// <param name="bitmapSize">The size of the image to create</param>
-        /// <param name="rectangleSize">The size of the selected area of the current image</param>
-        /// <param name="cursorLocation">The location of the cursor on the current image</param>
-        public void ZoomToSelectedArea(Size bitmapSize, Size rectangleSize, Point cursorLocation)
-        {
-            var newAxisLengths = CalculateAxisLengths(bitmapSize, rectangleSize);
-            var newFocusPoint = ConvertBitmapPointToGraphPoint(cursorLocation, bitmapSize);
-
-            var plane = new MandelPlane(newAxisLengths, newFocusPoint);
-            PlaneHistory.Add(plane);
-
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
-        }
-
-        /// <summary>
-        /// Redraws the previous Mandelbrot Set.
-        /// </summary>
-        /// <param name="bitmapSize">The size of the image to create</param>
-        public void ShowPreviousPlane(Size bitmapSize)
-        {
-            PlaneHistory.Remove(PlaneHistory.Last());
-
-            var plane = PlaneHistory.Last();
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
-        }
 
         /// <summary>
         /// Converts a point on a Bitmap to it's equivalent on the current portion of the complex
