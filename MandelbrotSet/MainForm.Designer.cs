@@ -48,8 +48,8 @@
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_Paint);
             this.pictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
             this.pictureBox.MouseEnter += new System.EventHandler(this.PictureBox_MouseEnter);
-            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             this.pictureBox.MouseLeave += new System.EventHandler(this.PictureBox_MouseLeave);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             this.pictureBox.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseWheel);
             // 
             // labelTime
@@ -61,14 +61,14 @@
             this.labelTime.TabIndex = 4;
             this.labelTime.Text = "0ms";
             // 
-            // Form
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.pictureBox);
-            this.Name = "Form";
+            this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Mandelbrot Set";
             this.Load += new System.EventHandler(this.Form1_Load);
