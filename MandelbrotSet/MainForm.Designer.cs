@@ -31,16 +31,21 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.labelTime = new System.Windows.Forms.Label();
+            this.labelWidth = new System.Windows.Forms.Label();
+            this.labelHeight = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(13, 536);
+            this.labelVersion.Location = new System.Drawing.Point(3, 0);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(0, 13);
+            this.labelVersion.Size = new System.Drawing.Size(45, 13);
             this.labelVersion.TabIndex = 5;
+            this.labelVersion.Text = "Version:";
             // 
             // pictureBox
             // 
@@ -70,12 +75,53 @@
             this.labelTime.TabIndex = 4;
             this.labelTime.Text = "0ms";
             // 
+            // labelWidth
+            // 
+            this.labelWidth.AutoSize = true;
+            this.labelWidth.Dock = System.Windows.Forms.DockStyle.Left;
+            this.labelWidth.Location = new System.Drawing.Point(54, 0);
+            this.labelWidth.Name = "labelWidth";
+            this.labelWidth.Size = new System.Drawing.Size(38, 13);
+            this.labelWidth.TabIndex = 6;
+            this.labelWidth.Text = "Width:";
+            // 
+            // labelHeight
+            // 
+            this.labelHeight.AutoSize = true;
+            this.labelHeight.Dock = System.Windows.Forms.DockStyle.Left;
+            this.labelHeight.Location = new System.Drawing.Point(98, 0);
+            this.labelHeight.Name = "labelHeight";
+            this.labelHeight.Size = new System.Drawing.Size(38, 13);
+            this.labelHeight.TabIndex = 7;
+            this.labelHeight.Text = "Height";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.labelHeight, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelVersion, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelWidth, 1, 0);
+            this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 540);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 10);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(139, 13);
+            this.tableLayoutPanel1.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.labelVersion);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.pictureBox);
             this.Name = "MainForm";
@@ -84,6 +130,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,6 +142,9 @@
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Label labelVersion;
+        private System.Windows.Forms.Label labelWidth;
+        private System.Windows.Forms.Label labelHeight;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
