@@ -56,14 +56,17 @@ The type of variable we choose to store Z and C as massively affects how far we 
 
 ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is calculated from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D)
   
-and  
+and
   
 ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is calculated from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D). because...  
   
 The formula in its most basic terms is... ![](https://latex.codecogs.com/svg.latex?%28a&plus;bi%29%28a&plus;bi%29&plus;a&plus;bi) which simplifies to...  
 ![](https://latex.codecogs.com/svg.latex?a%5E%7B2%7D&plus;2abi&plus;bi%5E%7B2%7D&plus;a&plus;bi)  
 ![](https://latex.codecogs.com/svg.latex?a%5E%7B2%7D-b%5E%7B2%7D&plus;2abi&plus;a&plus;bi)  
+![](https://latex.codecogs.com/svg.latex?a%5E%7B2%7D-b%5E%7B2%7D&plus;a&plus;2abi&plus;bi)
 
+The real terms ![](https://latex.codecogs.com/svg.latex?%28a%5E%7B2%7D-b%5E%7B2%7D&plus;a%29) are grouped together to calculate ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D). ![](https://latex.codecogs.com/svg.latex?%28a%5E%7B2%7D-b%5E%7B2%7D&plus;a%29) is the same as ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D).  
+The complex terms ![](https://latex.codecogs.com/svg.latex?%282abi&plus;bi%29) are grouped together to calculate ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D). ![](https://latex.codecogs.com/svg.latex?%282abi&plus;bi%29) is the same as ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
 
 
 ### Using a ComplexNumber class
