@@ -28,10 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.labelVersion = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.labelTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
+            // 
+            // labelVersion
+            // 
+            this.labelVersion.AutoSize = true;
+            this.labelVersion.Location = new System.Drawing.Point(13, 536);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(0, 13);
+            this.labelVersion.TabIndex = 5;
             // 
             // pictureBox
             // 
@@ -66,6 +75,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.pictureBox);
             this.Name = "MainForm";
@@ -83,6 +93,7 @@
 
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.Label labelVersion;
     }
 }
 

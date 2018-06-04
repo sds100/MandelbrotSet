@@ -66,6 +66,7 @@ namespace MandelbrotSet
         private void Form1_Load(object sender, EventArgs e)
         {
             presenter.DrawInitialMandelbrotSet(pictureBox.Size);
+            labelVersion.Text = $"Version: {Properties.Resources.Version}";
         }
 
         private void Form1_Resize(object sender, EventArgs e)
