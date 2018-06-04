@@ -47,18 +47,24 @@ The type of variable we choose to store Z and C as massively affects how far we 
 ```c#
     while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
     {
-      double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
+      double z_real_tmp = (z_real * z_real) - (z_im * z_im) + c_real;
 
       z_im = 2 * z_real * z_im + c_im;
       z_real = z_real_tmp;
     }
 ```
 
-![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is calculated from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D) because...  
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D) (z_real) is calculated from ![](https://latex.codecogs.com/svg.latex?Z%7B_%7Br%7D%7D%5E%7B2%7D%20-%20Z%7B_%7Bi%7D%7D%5E%7B2%7D%20&plus;%20C_%7Br%7D)
   
-I don't know *WHY* it works but it does.
+and  
+  
+![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is calculated from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D). because...  
+  
+The formula in its most basic terms is... ![](https://latex.codecogs.com/svg.latex?%28a&plus;bi%29%28a&plus;bi%29&plus;a&plus;bi) which simplifies to...  
+![](https://latex.codecogs.com/svg.latex?a%5E%7B2%7D&plus;2abi&plus;bi%5E%7B2%7D&plus;a&plus;bi)  
+![](https://latex.codecogs.com/svg.latex?a%5E%7B2%7D-b%5E%7B2%7D&plus;2abi&plus;a&plus;bi)  
 
-![](https://latex.codecogs.com/svg.latex?Z%7B_%7Bi%7D%7D) (z_im) is calculated from ![](https://latex.codecogs.com/svg.latex?2*Z_%7Br%7D*Z_%7Bi%7D&plus;C_%7Bi%7D).  
+
 
 ### Using a ComplexNumber class
 ```c#
