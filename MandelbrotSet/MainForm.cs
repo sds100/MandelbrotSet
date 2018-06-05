@@ -32,7 +32,7 @@ namespace MandelbrotSet
         /// Inherited from <see cref="IForm"/>. When assigned, sets the text of
         /// <see cref="labelTime"/>.
         /// </summary>
-        public long CalculationTime { set => labelTime.Text = $"{value} ms"; }
+        long IForm.CalculationTime { set => labelTime.Text = $"{value} ms"; }
 
         /// <summary>
         /// Inherited from <see cref="IForm"/>. Output the width of the axis.
@@ -60,6 +60,11 @@ namespace MandelbrotSet
         /// </summary>
         private Point cursorLocation;
 
+        /// <summary>
+        /// Stores whether the form is currently being resized.
+        /// </summary>
+        private bool IsResizing = false;
+
         private IPresenter presenter;
 
         public MainForm()
@@ -73,15 +78,25 @@ namespace MandelbrotSet
                 size: new Size(pictureBox.Width / 10, pictureBox.Height / 10));
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             presenter.DrawInitialMandelbrotSet(pictureBox.Size);
             labelVersion.Text = $"Version: {Properties.Resources.Version}";
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
+        private void MainForm_Resize(object sender, EventArgs e)
         {
+            IsResizing = true;
             SetRectangleSizeToAspectRatio();
+        }
+
+        /// <summary>
+        /// Triggered when the form has stopped being resized by dragging the edges and corners
+        /// with the mouse.
+        /// </summary>
+        private void MainForm_OnResizeEnd(object sender, EventArgs e)
+        {
+            IsResizing = false;
             presenter.Resize(pictureBox.Size);
         }
 
@@ -138,7 +153,6 @@ namespace MandelbrotSet
         /// </summary>
         private void PictureBox_MouseEnter(object sender, EventArgs e)
         {
-            //when the 
             this.Cursor = Cursors.Cross;
         }
 
@@ -148,6 +162,18 @@ namespace MandelbrotSet
         private void PictureBox_MouseLeave(object sender, EventArgs e)
         {
             this.Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// Triggered when the size of <see cref="pictureBox"/> changes. It changes the size of
+        /// the Mandelbrot Set.
+        /// </summary>
+        private void PictureBox_SizeChanged(object sender, EventArgs e)
+        {
+            if (!IsResizing)
+            {
+                presenter.Resize(pictureBox.Size);
+            }
         }
 
         /// <summary>

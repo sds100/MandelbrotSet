@@ -1,4 +1,6 @@
-﻿namespace MandelbrotSet
+﻿using System;
+
+namespace MandelbrotSet
 {
     partial class MainForm
     {
@@ -59,6 +61,7 @@
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.WaitOnLoad = true;
+            this.pictureBox.SizeChanged += new System.EventHandler(this.PictureBox_SizeChanged);
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_Paint);
             this.pictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseClick);
             this.pictureBox.MouseEnter += new System.EventHandler(this.PictureBox_MouseEnter);
@@ -127,8 +130,9 @@
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Mandelbrot Set";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.ResizeEnd += new System.EventHandler(this.MainForm_OnResizeEnd);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
