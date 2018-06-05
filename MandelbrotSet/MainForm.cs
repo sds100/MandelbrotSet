@@ -35,12 +35,12 @@ namespace MandelbrotSet
         public long CalculationTime { set => labelTime.Text = $"{value} ms"; }
 
         /// <summary>
-        /// 
+        /// Inherited from <see cref="IForm"/>. Output the width of the axis.
         /// </summary>
         double IForm.Width { set => labelWidth.Text = $"Width: {value}"; }
 
         /// <summary>
-        /// 
+        /// Inherited from <see cref="IForm"/>. Output the height of the axis.
         /// </summary>
         double IForm.Height { set => labelHeight.Text = $"Height: {value}"; }
 
