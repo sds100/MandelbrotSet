@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MandelbrotSet
+namespace MandelbrotSet.MainForm
 {
     /// <summary>
     /// The Presenter for <see cref="MainForm"/>

@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MandelbrotSet
@@ -15,7 +7,7 @@ namespace MandelbrotSet
     /// <summary>
     /// The main Form. Uses MVP pattern.
     /// </summary>
-    public partial class MainForm : Form, IForm
+    public partial class MainForm : Form, MainForm.IForm
     {
         /// <summary>
         /// Amount to change the size of the <see cref="selectionRectangle"/> by in pixels.
@@ -32,17 +24,17 @@ namespace MandelbrotSet
         /// Inherited from <see cref="IForm"/>. When assigned, sets the text of
         /// <see cref="labelTime"/>.
         /// </summary>
-        long IForm.CalculationTime { set => labelTime.Text = $"{value} ms"; }
+        long MainForm.IForm.CalculationTime { set => labelTime.Text = $"{value} ms"; }
 
         /// <summary>
         /// Inherited from <see cref="IForm"/>. Output the width of the axis.
         /// </summary>
-        double IForm.Width { set => labelWidth.Text = $"Width: {value}"; }
+        double MainForm.IForm.Width { set => labelWidth.Text = $"Width: {value}"; }
 
         /// <summary>
         /// Inherited from <see cref="IForm"/>. Output the height of the axis.
         /// </summary>
-        double IForm.Height { set => labelHeight.Text = $"Height: {value}"; }
+        double MainForm.IForm.Height { set => labelHeight.Text = $"Height: {value}"; }
 
         /// <summary>
         /// Calculates the aspect-ratio of <see cref="pictureBox"/> 
@@ -65,7 +57,7 @@ namespace MandelbrotSet
         /// </summary>
         private bool IsResizing = false;
 
-        private IPresenter presenter;
+        private MainForm.IPresenter presenter;
 
         public MainForm()
         {

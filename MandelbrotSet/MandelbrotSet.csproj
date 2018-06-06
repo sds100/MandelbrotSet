@@ -52,8 +52,11 @@
     <Compile Include="ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IForm.cs" />
-    <Compile Include="IPresenter.cs" />
+    <Compile Include="ExportForm\IForm.cs" />
+    <Compile Include="ExportForm\IPresenter.cs" />
+    <Compile Include="ExportForm\Presenter.cs" />
+    <Compile Include="MainForm\IForm.cs" />
+    <Compile Include="MainForm\IPresenter.cs" />
     <Compile Include="ColorHelper.cs" />
     <Compile Include="ComplexNumber.cs" />
     <Compile Include="MainForm.cs">
@@ -63,7 +66,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MandelPlane.cs" />
-    <Compile Include="Presenter.cs" />
+    <Compile Include="MainForm\Presenter.cs" />
     <Compile Include="MandelbrotSetBitmap.cs" />
     <Compile Include="PointD.cs" />
     <Compile Include="Program.cs" />
