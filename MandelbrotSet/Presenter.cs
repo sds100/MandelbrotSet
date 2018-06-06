@@ -156,7 +156,7 @@ namespace MandelbrotSet
                 x: ((pointX - bitmapSize.Width / 2) * CurrentAxisLengths.X / bitmapSize.Width)
                 + CurrentFocusPoint.X,
 
-                y: ((pointY - bitmapSize.Height / 2) * CurrentAxisLengths.Y / bitmapSize.Width)
+                y: (-(pointY - bitmapSize.Height / 2) * CurrentAxisLengths.Y / bitmapSize.Width)
                 + CurrentFocusPoint.Y
             );
         }
