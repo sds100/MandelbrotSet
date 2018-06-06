@@ -207,5 +207,10 @@ namespace MandelbrotSet
             //redraw the PictureBox so the rectangle is drawn in the new position
             pictureBox.Refresh();
         }
+
+        private void ButtonExport_Click(object sender, EventArgs e)
+        {
+            new ExportForm().ShowDialog();
+        }
     }
 }
