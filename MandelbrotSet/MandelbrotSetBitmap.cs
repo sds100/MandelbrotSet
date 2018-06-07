@@ -139,7 +139,7 @@ namespace MandelbrotSet
                 + planeCentre.X;
 
             // the imaginary part of C will be the Y coordinate
-            double c_im = ((pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
+            double c_im = (-(pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
                 + planeCentre.Y;
             
             double z_real = 0;
