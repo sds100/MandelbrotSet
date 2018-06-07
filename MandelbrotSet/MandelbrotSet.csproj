@@ -46,10 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AxisLengths.cs" />
-    <Compile Include="ExportForm.cs">
+    <Compile Include="ExportForm\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExportForm.Designer.cs">
+    <Compile Include="ExportForm\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ExportForm\IForm.cs" />
@@ -59,10 +59,10 @@
     <Compile Include="MainForm\IPresenter.cs" />
     <Compile Include="ColorHelper.cs" />
     <Compile Include="ComplexNumber.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="MainForm\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MandelPlane.cs" />
@@ -71,10 +71,10 @@
     <Compile Include="PointD.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ExportForm.resx">
+    <EmbeddedResource Include="ExportForm\ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MandelbrotSet.MainForm
 {
     /// <summary>
-    /// The Presenter for <see cref="MainForm"/>
+    /// The Presenter for <see cref="Form"/>
     /// </summary>
     public class Presenter : IPresenter
     {
@@ -28,7 +28,7 @@ namespace MandelbrotSet.MainForm
         private List<MandelPlane> PlaneHistory { get; }
 
         /// <summary>
-        /// Interface from the <see cref="MainForm"/>.
+        /// Interface from the <see cref="Form"/>.
         /// It is an element of the MVP pattern and used to communicate with the form.
         /// </summary>
         private IForm Form { get; }
@@ -53,8 +53,8 @@ namespace MandelbrotSet.MainForm
                 new MandelPlane(MandelPlane.DEFAULT_AXIS_LENGTHS,
                                 MandelPlane.DEFAULT_FOCUS_POINT)));
 
-            Form.Width = MandelPlane.DEFAULT_AXIS_LENGTHS.X;
-            Form.Height = MandelPlane.DEFAULT_AXIS_LENGTHS.Y;
+            Form.AxisWidth = MandelPlane.DEFAULT_AXIS_LENGTHS.X;
+            Form.AxisHeight = MandelPlane.DEFAULT_AXIS_LENGTHS.Y;
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace MandelbrotSet.MainForm
                 newBitmapSize,
                 plane));
 
-            Form.Width = plane.Width;
-            Form.Height = plane.Height;
+            Form.AxisWidth = plane.Width;
+            Form.AxisHeight = plane.Height;
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace MandelbrotSet.MainForm
 
             DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
 
-            Form.Width = plane.Width;
-            Form.Height = plane.Height;
+            Form.AxisWidth = plane.Width;
+            Form.AxisHeight = plane.Height;
         }
 
         /// <summary>
@@ -105,8 +105,8 @@ namespace MandelbrotSet.MainForm
             var plane = PlaneHistory.Last();
             DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
 
-            Form.Width = plane.Width;
-            Form.Height = plane.Height;
+            Form.AxisWidth = plane.Width;
+            Form.AxisHeight = plane.Height;
         }
         
         /// <summary>
