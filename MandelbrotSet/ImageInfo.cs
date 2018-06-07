@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace MandelbrotSet
 {
     /// <summary>
-    /// Represents a particular portion of a plane.
+    /// Stores necessary information to recreate an image.
     /// </summary>
-    public class MandelPlane
+    public class ImageInfo
     {
         /// <summary>
         /// Default length of one axis.
@@ -24,7 +24,7 @@ namespace MandelbrotSet
             = new AxisLengths(DEFAULT_AXIS_LENGTH, DEFAULT_AXIS_LENGTH);
 
         /// <summary>
-        /// The default point to draw the inital Mandelbrot Set around.
+        /// The point to draw the inital Mandelbrot Set around.
         /// </summary>
         public static PointD DEFAULT_FOCUS_POINT = new PointD(0, 0);
 
@@ -34,7 +34,7 @@ namespace MandelbrotSet
         public double Width => AxisLengths.X;
         public double Height => AxisLengths.Y;
 
-        public MandelPlane(AxisLengths axisLengths, PointD focusPoint)
+        public ImageInfo(AxisLengths axisLengths, PointD focusPoint)
         {
             AxisLengths = axisLengths;
             FocusPoint = focusPoint;
