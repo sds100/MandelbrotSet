@@ -65,17 +65,14 @@ namespace MandelbrotSet.PropertiesForm
             return true;
         }
 
-        private void PropertiesForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char) Keys.Enter)
-            {
-                presenter.ShowPreview();
-            }
-        }
-
         private void PropertiesForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void ButtonApply_Click(object sender, EventArgs e)
+        {
+            presenter.ShowPreview();
         }
     }
 }

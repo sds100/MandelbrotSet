@@ -48,6 +48,7 @@
             this.numUpDownMagnification = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.buttonApply = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownMagnification)).BeginInit();
@@ -83,7 +84,6 @@
             0,
             0,
             0});
-            this.numUpDownWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PropertiesForm_KeyPress);
             // 
             // numUpDownHeight
             // 
@@ -106,7 +106,6 @@
             0,
             0,
             0});
-            this.numUpDownHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PropertiesForm_KeyPress);
             // 
             // label2
             // 
@@ -213,7 +212,6 @@
             this.textBoxPointX.Name = "textBoxPointX";
             this.textBoxPointX.Size = new System.Drawing.Size(240, 20);
             this.textBoxPointX.TabIndex = 1;
-            this.textBoxPointX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PropertiesForm_KeyPress);
             // 
             // textBoxPointY
             // 
@@ -221,7 +219,6 @@
             this.textBoxPointY.Name = "textBoxPointY";
             this.textBoxPointY.Size = new System.Drawing.Size(240, 20);
             this.textBoxPointY.TabIndex = 2;
-            this.textBoxPointY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PropertiesForm_KeyPress);
             // 
             // label11
             // 
@@ -260,7 +257,6 @@
             0,
             0,
             0});
-            this.numUpDownMagnification.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PropertiesForm_KeyPress);
             // 
             // label3
             // 
@@ -275,19 +271,31 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(239, 73);
+            this.label7.Location = new System.Drawing.Point(244, 94);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(114, 13);
+            this.label7.Size = new System.Drawing.Size(127, 13);
             this.label7.TabIndex = 24;
-            this.label7.Text = "Press \"Enter\" to apply.";
+            this.label7.Text = "Or press \"Enter\" to apply.";
+            // 
+            // buttonApply
+            // 
+            this.buttonApply.Location = new System.Drawing.Point(267, 68);
+            this.buttonApply.Name = "buttonApply";
+            this.buttonApply.Size = new System.Drawing.Size(75, 23);
+            this.buttonApply.TabIndex = 25;
+            this.buttonApply.Text = "Apply";
+            this.buttonApply.UseVisualStyleBackColor = true;
+            this.buttonApply.Click += new System.EventHandler(this.ButtonApply_Click);
             // 
             // PropertiesForm
             // 
+            this.AcceptButton = this.buttonApply;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(365, 307);
+            this.ClientSize = new System.Drawing.Size(374, 307);
+            this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numUpDownMagnification);
@@ -313,7 +321,6 @@
             this.Name = "PropertiesForm";
             this.Text = "Properties";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PropertiesForm_FormClosing);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PropertiesForm_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownMagnification)).EndInit();
@@ -343,5 +350,6 @@
         private System.Windows.Forms.NumericUpDown numUpDownMagnification;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button buttonApply;
     }
 }
