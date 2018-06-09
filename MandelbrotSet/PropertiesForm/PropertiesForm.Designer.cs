@@ -49,6 +49,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonApply = new System.Windows.Forms.Button();
+            this.buttonDebug = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownMagnification)).BeginInit();
@@ -150,6 +151,7 @@
             this.buttonExport.TabIndex = 9;
             this.buttonExport.Text = "Export";
             this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
             // 
             // label6
             // 
@@ -290,6 +292,16 @@
             this.buttonApply.UseVisualStyleBackColor = true;
             this.buttonApply.Click += new System.EventHandler(this.ButtonApply_Click);
             // 
+            // buttonDebug
+            // 
+            this.buttonDebug.Location = new System.Drawing.Point(287, 272);
+            this.buttonDebug.Name = "buttonDebug";
+            this.buttonDebug.Size = new System.Drawing.Size(75, 23);
+            this.buttonDebug.TabIndex = 26;
+            this.buttonDebug.Text = "Debug";
+            this.buttonDebug.UseVisualStyleBackColor = true;
+            this.buttonDebug.Click += new System.EventHandler(this.ButtonDebug_Click);
+            // 
             // PropertiesForm
             // 
             this.AcceptButton = this.buttonApply;
@@ -298,6 +310,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(374, 307);
+            this.Controls.Add(this.buttonDebug);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
@@ -354,5 +367,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonApply;
+        private System.Windows.Forms.Button buttonDebug;
     }
 }

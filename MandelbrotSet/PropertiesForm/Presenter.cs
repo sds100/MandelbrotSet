@@ -28,6 +28,15 @@ namespace MandelbrotSet.PropertiesForm
         {
             if (form.AreOptionsValid())
             {
+                string path = CreatePath(form.Folder, form.FileName);
+
+                var bitmapSize = form.BitmapSize;
+
+                var imageInfo = new ImageInfo(
+                    CalculateAxisLengths(form.Magnification),
+                    form.FocusPoint);
+
+                MandelbrotSetBitmap.ExportImageAsync(path, bitmapSize, imageInfo);
             }
         }
 
@@ -41,6 +50,11 @@ namespace MandelbrotSet.PropertiesForm
                 mainFormPresenter.DrawImageAsync(mainFormPresenter.CurrentBitmapSize, imageInfo, true);
             }
             catch (Exception) { }
+        }
+
+        private string CreatePath(string folder, string fileName)
+        {
+            return $"{folder}\\{fileName}.png";
         }
 
         private AxisLengths CalculateAxisLengths(double magnification)

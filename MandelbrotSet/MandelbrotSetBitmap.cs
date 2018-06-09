@@ -112,6 +112,19 @@ namespace MandelbrotSet
             return bitmap;
         }
 
+        public static async void ExportImageAsync(string path, Size bitmapSize, ImageInfo imageInfo)
+        {
+            await Task.Run(() =>
+            {
+                var bitmap = Create(bitmapSize, imageInfo);
+
+                if (bitmap != null)
+                {
+                    bitmap.Save(path);
+                }
+            });
+        }
+
         /// <summary>
         /// Uses the Mandelbrot Set algorithm to determine what color a pixel should be.
         /// Look at the README if you don't understand this code.
@@ -122,7 +135,7 @@ namespace MandelbrotSet
         /// <param name="maxIterations"></param>
         /// <returns></returns>
         private static Color CalculatePixel(Size bitmapSize, ImageInfo plane, Point pixelCoords)
-        {          
+        {
             double planeWidth = plane.AxisWidth;
             double planeHeight = plane.AxisHeight;
 
@@ -141,26 +154,26 @@ namespace MandelbrotSet
             // the imaginary part of C will be the Y coordinate
             double c_im = (-(pixelCoords.Y - bitmapHeight / 2) * planeHeight / bitmapWidth)
                 + planeCentre.Y;
-            
+
             double z_real = 0;
             double z_im = 0;
-            
+
             int iteration = 0;
-            
+
             while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
             {
                 double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
-                
+
                 z_im = 2 * z_real * z_im + c_im;
                 z_real = z_real_tmp;
-                
+
                 iteration++;
             }
 
             if (iteration < MAX_ITERATIONS)
             {
                 var color = ColorHelper.BLUE_BROWN[iteration % ColorHelper.BLUE_BROWN.Length];
-                
+
                 return color;
             }
             else

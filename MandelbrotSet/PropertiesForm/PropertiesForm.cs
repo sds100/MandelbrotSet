@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MandelbrotSet.PropertiesForm
 {
@@ -60,9 +61,15 @@ namespace MandelbrotSet.PropertiesForm
                 return false;
             }
 
-            if (labelFolder.Text.Length == 0)
+            if (String.IsNullOrWhiteSpace(Folder) || String.IsNullOrWhiteSpace(FileName))
             {
                 MessageBox.Show("Must choose a directory!");
+                return false;
+            }
+
+            if (!Directory.Exists(Folder))
+            {
+                MessageBox.Show("Folder doesn't exist!");
                 return false;
             }
 
@@ -90,6 +97,17 @@ namespace MandelbrotSet.PropertiesForm
                     Folder = dialog.SelectedPath;
                 }
             }
+        }
+
+        private void ButtonExport_Click(object sender, EventArgs e)
+        {
+            presenter.Export();
+        }
+
+        private void ButtonDebug_Click(object sender, EventArgs e)
+        {
+            Folder = "A:\\Seth\\Pictures\\MandelbrotSets";
+            textBoxFileName.Text = "test";
         }
     }
 }
