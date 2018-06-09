@@ -57,7 +57,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 142);
+            this.label1.Location = new System.Drawing.Point(12, 149);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             // numUpDownWidth
             // 
-            this.numUpDownWidth.Location = new System.Drawing.Point(74, 140);
+            this.numUpDownWidth.Location = new System.Drawing.Point(74, 147);
             this.numUpDownWidth.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -87,7 +87,7 @@
             // 
             // numUpDownHeight
             // 
-            this.numUpDownHeight.Location = new System.Drawing.Point(74, 170);
+            this.numUpDownHeight.Location = new System.Drawing.Point(74, 177);
             this.numUpDownHeight.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -110,7 +110,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 172);
+            this.label2.Location = new System.Drawing.Point(12, 177);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 3;
@@ -119,7 +119,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 203);
+            this.label4.Location = new System.Drawing.Point(13, 210);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 6;
@@ -127,7 +127,7 @@
             // 
             // textBoxFileName
             // 
-            this.textBoxFileName.Location = new System.Drawing.Point(74, 203);
+            this.textBoxFileName.Location = new System.Drawing.Point(74, 207);
             this.textBoxFileName.Name = "textBoxFileName";
             this.textBoxFileName.Size = new System.Drawing.Size(114, 20);
             this.textBoxFileName.TabIndex = 6;
@@ -164,7 +164,8 @@
             // 
             this.labelDirectory.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelDirectory.AutoSize = true;
-            this.labelDirectory.Location = new System.Drawing.Point(16, 126);
+            this.labelDirectory.Location = new System.Drawing.Point(14, 131);
+            this.labelDirectory.Margin = new System.Windows.Forms.Padding(5);
             this.labelDirectory.Name = "labelDirectory";
             this.labelDirectory.Size = new System.Drawing.Size(0, 13);
             this.labelDirectory.TabIndex = 11;
@@ -178,6 +179,7 @@
             this.buttonChooseFolder.TabIndex = 12;
             this.buttonChooseFolder.Text = "Choose folder";
             this.buttonChooseFolder.UseVisualStyleBackColor = true;
+            this.buttonChooseFolder.Click += new System.EventHandler(this.ButtonChooseFolder_Click);
             // 
             // label8
             // 

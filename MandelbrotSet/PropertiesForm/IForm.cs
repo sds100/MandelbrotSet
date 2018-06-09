@@ -9,7 +9,7 @@ namespace MandelbrotSet.PropertiesForm
         double Magnification { get; set; }
         PointD FocusPoint { get; set; }
         String FileName { get; }
-        String Directory { get; }
+        String Directory { get; set; }
 
         bool AreOptionsValid();
     }

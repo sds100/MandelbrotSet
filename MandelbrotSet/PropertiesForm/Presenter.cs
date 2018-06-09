@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MandelbrotSet.PropertiesForm
 {
@@ -19,7 +20,7 @@ namespace MandelbrotSet.PropertiesForm
         {
             this.form = form;
             this.mainFormPresenter = mainFormPresenter;
-            
+
             ShowPreview();
         }
 
@@ -27,7 +28,6 @@ namespace MandelbrotSet.PropertiesForm
         {
             if (form.AreOptionsValid())
             {
-
             }
         }
 

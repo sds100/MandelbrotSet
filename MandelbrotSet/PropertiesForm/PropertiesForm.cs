@@ -11,7 +11,7 @@ namespace MandelbrotSet.PropertiesForm
         public double Magnification
         {
             get => (double)numUpDownMagnification.Value;
-            set => numUpDownMagnification.Value = (decimal) value;
+            set => numUpDownMagnification.Value = (decimal)value;
         }
 
         public PointD FocusPoint
@@ -29,7 +29,11 @@ namespace MandelbrotSet.PropertiesForm
 
         public string FileName => textBoxFileName.Text;
 
-        public string Directory => labelDirectory.Text;
+        public string Directory
+        {
+            get => labelDirectory.Text;
+            set => labelDirectory.Text = value;
+        }
 
         private readonly IPresenter presenter;
 
@@ -73,6 +77,19 @@ namespace MandelbrotSet.PropertiesForm
         private void ButtonApply_Click(object sender, EventArgs e)
         {
             presenter.ShowPreview();
+        }
+
+        private void ButtonChooseFolder_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                var result = dialog.ShowDialog();
+
+                if (result == DialogResult.OK && !String.IsNullOrWhiteSpace(dialog.SelectedPath))
+                {
+                    Directory = dialog.SelectedPath;
+                }
+            }
         }
     }
 }
