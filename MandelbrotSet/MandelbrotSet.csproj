@@ -46,15 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AxisLengths.cs" />
-    <Compile Include="ExportForm\ExportForm.cs">
+    <Compile Include="PropertiesForm\PropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExportForm\ExportForm.Designer.cs">
-      <DependentUpon>ExportForm.cs</DependentUpon>
+    <Compile Include="PropertiesForm\PropertiesForm.Designer.cs">
+      <DependentUpon>PropertiesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExportForm\IForm.cs" />
-    <Compile Include="ExportForm\IPresenter.cs" />
-    <Compile Include="ExportForm\Presenter.cs" />
+    <Compile Include="PropertiesForm\IForm.cs" />
+    <Compile Include="PropertiesForm\IPresenter.cs" />
+    <Compile Include="PropertiesForm\Presenter.cs" />
     <Compile Include="MainForm\IForm.cs" />
     <Compile Include="MainForm\IPresenter.cs" />
     <Compile Include="ColorHelper.cs" />
@@ -65,17 +65,26 @@
     <Compile Include="MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MandelPlane.cs" />
+    <Compile Include="ImageInfo.cs" />
     <Compile Include="MainForm\Presenter.cs" />
     <Compile Include="MandelbrotSetBitmap.cs" />
     <Compile Include="PointD.cs" />
+    <Compile Include="PreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewForm.Designer.cs">
+      <DependentUpon>PreviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ExportForm\ExportForm.resx">
-      <DependentUpon>ExportForm.cs</DependentUpon>
+    <EmbeddedResource Include="PropertiesForm\PropertiesForm.resx">
+      <DependentUpon>PropertiesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewForm.resx">
+      <DependentUpon>PreviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

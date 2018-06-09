@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using MandelbrotSet.PropertiesForm;
 
 namespace MandelbrotSet.MainForm
 {
@@ -29,12 +30,18 @@ namespace MandelbrotSet.MainForm
         /// <summary>
         /// Inherited from <see cref="IForm"/>. Output the width of the axis.
         /// </summary>
-        public double AxisWidth { set => labelWidth.Text = $"Width: {value}"; }
+        public double AxisWidth
+        {
+            set => labelWidth.Text = $"Width: {value}";
+        }
 
         /// <summary>
         /// Inherited from <see cref="IForm"/>. Output the height of the axis.
         /// </summary>
-        public double AxisHeight { set => labelHeight.Text = $"Height: {value}"; }
+        public double AxisHeight
+        {
+            set => labelHeight.Text = $"Height: {value}";
+        }
 
         /// <summary>
         /// Calculates the aspect-ratio of <see cref="pictureBox"/> 
@@ -57,7 +64,9 @@ namespace MandelbrotSet.MainForm
         /// </summary>
         private bool IsResizing = false;
 
-        private IPresenter presenter;
+        private readonly IPresenter presenter;
+
+        private PropertiesForm.PropertiesForm exportForm;
 
         public MainForm()
         {
@@ -70,10 +79,19 @@ namespace MandelbrotSet.MainForm
                 size: new Size(pictureBox.Width / 10, pictureBox.Height / 10));
         }
 
+        public void OnImageChange(ImageInfo imageInfo)
+        {
+            exportForm.Magnification = CalculateMagnification(imageInfo.AxisLengths);
+            exportForm.FocusPoint = imageInfo.FocusPoint;
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            presenter.DrawInitialMandelbrotSet(pictureBox.Size);
+            presenter.DrawInitialImage(pictureBox.Size);
             labelVersion.Text = $"Version: {Properties.Resources.Version}";
+
+            exportForm = new PropertiesForm.PropertiesForm(presenter);
+            exportForm.Show();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -202,7 +220,12 @@ namespace MandelbrotSet.MainForm
 
         private void ButtonExport_Click(object sender, EventArgs e)
         {
-            new ExportForm.ExportForm().ShowDialog();
+
+        }
+
+        private double CalculateMagnification(AxisLengths axisLengths)
+        {
+            return Math.Round(ImageInfo.DEFAULT_AXIS_LENGTHS.X / axisLengths.X, 5);
         }
     }
 }

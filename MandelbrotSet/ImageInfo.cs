@@ -14,8 +14,7 @@ namespace MandelbrotSet
     {
         /// <summary>
         /// Default length of one axis.
-        /// For example: If the x axis goes from -2 to 2, it has a length of 8
-        ///
+        /// For example: If the x axis goes from -2 to 2, it has a length of 4
         /// The default is 4 because the entier Mandelbrot Set lies within a circle with radius of 2.
         /// </summary>
         private const double DEFAULT_AXIS_LENGTH = 4;
@@ -31,8 +30,15 @@ namespace MandelbrotSet
         public AxisLengths AxisLengths { get; set; }
         public PointD FocusPoint { get; set; }
 
-        public double Width => AxisLengths.X;
-        public double Height => AxisLengths.Y;
+        /// <summary>
+        /// Axis width.
+        /// </summary>
+        public double AxisWidth => AxisLengths.X;
+
+        /// <summary>
+        /// Axis height.
+        /// </summary>
+        public double AxisHeight => AxisLengths.Y;
 
         public ImageInfo(AxisLengths axisLengths, PointD focusPoint)
         {

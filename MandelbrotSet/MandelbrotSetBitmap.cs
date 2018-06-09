@@ -13,7 +13,7 @@ namespace MandelbrotSet
     /// <summary>
     /// Where Mandelbrot Sets are drawn
     /// </summary>
-    public static class MandelbrotSet
+    public static class MandelbrotSetBitmap
     {
         /// <summary>
         /// The maximum number of iterations for each pixel until it will be determined
@@ -30,9 +30,9 @@ namespace MandelbrotSet
         /// Create a Mandelbrot Set.
         /// </summary>
         /// <param name="bitmapSize">The size the final bitmap should be</param>
-        /// <param name="plane">The plane to base all calculations off.</param>
+        /// <param name="imageInfo">The plane to base all calculations off.</param>
         /// <returns>A bitmap representation of a Mandelbrot Set</returns>
-        public static Bitmap Create(Size bitmapSize, MandelPlane plane)
+        public static Bitmap Create(Size bitmapSize, ImageInfo imageInfo)
         {
             int bitmapWidth = bitmapSize.Width;
             int bitmapHeight = bitmapSize.Height;
@@ -66,7 +66,7 @@ namespace MandelbrotSet
 
                             var pixel = CalculatePixel(
                                 bitmapSize,
-                                plane,
+                                imageInfo,
                                 new Point(column, thisRow));
 
                             bitmapRepresentation[column, thisRow] = pixel;
@@ -88,7 +88,7 @@ namespace MandelbrotSet
                 {
                     if (bitmapRepresentation[column, row].A != 255)
                     {
-                        bitmapRepresentation[column, row] = CalculatePixel(bitmapSize, plane, new Point(column, row));
+                        bitmapRepresentation[column, row] = CalculatePixel(bitmapSize, imageInfo, new Point(column, row));
                     }
                 }
             }
@@ -121,10 +121,10 @@ namespace MandelbrotSet
         /// <param name="pixelCoords"></param>
         /// <param name="maxIterations"></param>
         /// <returns></returns>
-        private static Color CalculatePixel(Size bitmapSize, MandelPlane plane, Point pixelCoords)
+        private static Color CalculatePixel(Size bitmapSize, ImageInfo plane, Point pixelCoords)
         {          
-            double planeWidth = plane.Width;
-            double planeHeight = plane.Height;
+            double planeWidth = plane.AxisWidth;
+            double planeHeight = plane.AxisHeight;
 
             var planeCentre = plane.FocusPoint;
 

@@ -1,12 +1,16 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace MandelbrotSet.MainForm
 {
-    interface IPresenter
+    public interface IPresenter
     {
-        void DrawInitialMandelbrotSet(Size bitmapSize);
+        void DrawImageAsync(Size bitmapSize, ImageInfo imageInfo, bool saveToHistory);
+        void DrawInitialImage(Size bitmapSize);
         void ZoomToSelectedArea(Size bitmapSize, Size rectangleSize, Point cursorLocation);
         void ShowPreviousPlane(Size bitmapSize);
         void Resize(Size newBitmapSize);
+
+        Size CurrentBitmapSize { set;  get; }
     }
 }

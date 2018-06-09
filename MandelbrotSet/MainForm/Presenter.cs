@@ -14,67 +14,62 @@ namespace MandelbrotSet.MainForm
         /// <summary>
         /// Gets the lengths of the current axis'.
         /// </summary>
-        private AxisLengths CurrentAxisLengths => PlaneHistory.Last().AxisLengths;
+        private AxisLengths CurrentAxisLengths => ImageInfoHistory.Last().AxisLengths;
 
         /// <summary>
         /// Gets the current focus point.
         /// </summary>
-        private PointD CurrentFocusPoint => PlaneHistory.Last().FocusPoint;
+        private PointD CurrentFocusPoint => ImageInfoHistory.Last().FocusPoint;
 
         /// <summary>
-        /// Stores instances of <see cref="MandelPlane"/> so previous Mandelbrot Sets can be
+        /// Stores instances of <see cref="ImageInfo"/> so previous Mandelbrot Sets can be
         /// recreated
         /// </summary>
-        private List<MandelPlane> PlaneHistory { get; }
+        private List<ImageInfo> ImageInfoHistory { get; }
+
+        public Size CurrentBitmapSize { set; get; }
 
         /// <summary>
         /// Interface from the <see cref="Form"/>.
         /// It is an element of the MVP pattern and used to communicate with the form.
         /// </summary>
-        private IForm Form { get; }
+        private readonly IForm Form;
 
-        /// <param name="form">Implentation of <see cref="IForm"/> to use to output
-        /// Mandelbrot Sets.</param>
+        /// <param name="form">Implentation of <see cref="IForm"/> to use to output images</param>
         public Presenter(IForm form)
         {
-            PlaneHistory = new List<MandelPlane>();
+            ImageInfoHistory = new List<ImageInfo>();
             Form = form;
 
             //add the inital axislengths and focus-point to history.
-            PlaneHistory.Add(new MandelPlane(
-                MandelPlane.DEFAULT_AXIS_LENGTHS,
-                MandelPlane.DEFAULT_FOCUS_POINT));
+            ImageInfoHistory.Add(new ImageInfo(
+                ImageInfo.DEFAULT_AXIS_LENGTHS,
+                ImageInfo.DEFAULT_FOCUS_POINT));
         }
 
-        public void DrawInitialMandelbrotSet(Size bitmapSize)
+        public void DrawInitialImage(Size bitmapSize)
         {
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(
-                bitmapSize,
-                new MandelPlane(MandelPlane.DEFAULT_AXIS_LENGTHS,
-                                MandelPlane.DEFAULT_FOCUS_POINT)));
+            var imageInfo = new ImageInfo(ImageInfo.DEFAULT_AXIS_LENGTHS,
+                                ImageInfo.DEFAULT_FOCUS_POINT);
 
-            Form.AxisWidth = MandelPlane.DEFAULT_AXIS_LENGTHS.X;
-            Form.AxisHeight = MandelPlane.DEFAULT_AXIS_LENGTHS.Y;
+            DrawImageAsync(bitmapSize, imageInfo, false);
         }
 
         /// <summary>
+        /// Inherited from <see cref="IForm"/>.
         /// Redraw the current Mandelbrot Set with a different size but keep it's visible portion
         /// of the plane the same.
         /// </summary>
         /// <param name="newBitmapSize"> The new size of the Mandelbrot Set</param>
         public void Resize(Size newBitmapSize)
         {
-            var plane = PlaneHistory.Last();
+            var imageInfo = ImageInfoHistory.Last();
 
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(
-                newBitmapSize,
-                plane));
-
-            Form.AxisWidth = plane.Width;
-            Form.AxisHeight = plane.Height;
+            DrawImageAsync(newBitmapSize, imageInfo, false);
         }
 
         /// <summary>
+        /// Inherited from <see cref="IForm"/>.
         /// Moves and zooms to the selected part of the plane.
         /// </summary>
         /// <param name="bitmapSize">The size of the image to create</param>
@@ -85,37 +80,45 @@ namespace MandelbrotSet.MainForm
             var newAxisLengths = CalculateAxisLengths(bitmapSize, rectangleSize);
             var newFocusPoint = ConvertBitmapPointToGraphPoint(cursorLocation, bitmapSize);
 
-            var plane = new MandelPlane(newAxisLengths, newFocusPoint);
-            PlaneHistory.Add(plane);
+            var imageInfo = new ImageInfo(newAxisLengths, newFocusPoint);
 
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
-
-            Form.AxisWidth = plane.Width;
-            Form.AxisHeight = plane.Height;
+            DrawImageAsync(bitmapSize, imageInfo, true);
         }
 
         /// <summary>
+        /// Inherited from <see cref="IForm"/>.
         /// Redraws the previous Mandelbrot Set.
         /// </summary>
         /// <param name="bitmapSize">The size of the image to create</param>
         public void ShowPreviousPlane(Size bitmapSize)
         {
-            PlaneHistory.Remove(PlaneHistory.Last());
-
-            var plane = PlaneHistory.Last();
-            DrawMandelbrotSetAsync(() => MandelbrotSet.Create(bitmapSize, plane));
-
-            Form.AxisWidth = plane.Width;
-            Form.AxisHeight = plane.Height;
+            ImageInfoHistory.Remove(ImageInfoHistory.Last());
+            
+            if (ImageInfoHistory.Count == 0)
+            {
+                DrawInitialImage(bitmapSize);
+            }
+            else
+            {
+                var imageInfo = ImageInfoHistory.Last();
+                DrawImageAsync(bitmapSize, imageInfo, false);
+            }
         }
-        
+
         /// <summary>
         /// Create a Mandelbrot Set then show it to the user asynchronously.
         /// </summary>
         /// <param name="func">The function to invoke asynchronously which will return a bitmap
         /// of a Mandelbrot Set</param>
-        private async void DrawMandelbrotSetAsync(Func<Bitmap> func)
+        public async void DrawImageAsync(Size bitmapSize, ImageInfo imageInfo, bool saveToHistory)
         {
+            CurrentBitmapSize = bitmapSize;
+
+            if (saveToHistory)
+            {
+                ImageInfoHistory.Add(imageInfo);
+            }
+
             /*
              * get the current time which will be used to calculate how long it took to create and
              * then output the MandelbrotSet
@@ -124,7 +127,7 @@ namespace MandelbrotSet.MainForm
 
             await Task.Run(() =>
             {
-                var bitmap = func.Invoke();
+                var bitmap = MandelbrotSetBitmap.Create(bitmapSize, imageInfo);
 
                 if (bitmap != null)
                 {
@@ -136,8 +139,12 @@ namespace MandelbrotSet.MainForm
 
             //output the time taken to draw a Mandelbrot Set
             Form.CalculationTime = after - before;
-        }
 
+            Form.AxisWidth = imageInfo.AxisWidth;
+            Form.AxisHeight = imageInfo.AxisHeight;
+
+            Form.OnImageChange(imageInfo);
+        }
 
         /// <summary>
         /// Converts a point on a Bitmap to it's equivalent on the current portion of the complex

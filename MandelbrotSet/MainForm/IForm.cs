@@ -12,6 +12,8 @@ namespace MandelbrotSet.MainForm
         Bitmap MandelbrotSet { set; }
         long CalculationTime { set; }
         double AxisWidth { set; }
-        double AxisHeight { set; }
+        double AxisHeight { set;}
+
+        void OnImageChange(ImageInfo imageInfo);
     }
 }
