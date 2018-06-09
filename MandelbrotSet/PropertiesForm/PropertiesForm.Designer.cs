@@ -37,7 +37,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.buttonExport = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.labelDirectory = new System.Windows.Forms.Label();
+            this.labelFolder = new System.Windows.Forms.Label();
             this.buttonChooseFolder = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -156,19 +156,20 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(12, 237);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.Size = new System.Drawing.Size(39, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Directory:";
+            this.label6.Text = "Folder:";
             // 
-            // labelDirectory
+            // labelFolder
             // 
-            this.labelDirectory.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelDirectory.AutoSize = true;
-            this.labelDirectory.Location = new System.Drawing.Point(14, 131);
-            this.labelDirectory.Margin = new System.Windows.Forms.Padding(5);
-            this.labelDirectory.Name = "labelDirectory";
-            this.labelDirectory.Size = new System.Drawing.Size(0, 13);
-            this.labelDirectory.TabIndex = 11;
+            this.labelFolder.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelFolder.AutoSize = true;
+            this.labelFolder.Location = new System.Drawing.Point(72, 237);
+            this.labelFolder.Margin = new System.Windows.Forms.Padding(5);
+            this.labelFolder.Name = "labelFolder";
+            this.labelFolder.Size = new System.Drawing.Size(128, 13);
+            this.labelFolder.TabIndex = 11;
+            this.labelFolder.Text = "NO FOLDER SELECTED";
             // 
             // buttonChooseFolder
             // 
@@ -308,7 +309,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.buttonChooseFolder);
-            this.Controls.Add(this.labelDirectory);
+            this.Controls.Add(this.labelFolder);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.label5);
@@ -341,7 +342,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label labelDirectory;
+        private System.Windows.Forms.Label labelFolder;
         private System.Windows.Forms.Button buttonChooseFolder;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;

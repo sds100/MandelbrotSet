@@ -29,10 +29,10 @@ namespace MandelbrotSet.PropertiesForm
 
         public string FileName => textBoxFileName.Text;
 
-        public string Directory
+        public string Folder
         {
-            get => labelDirectory.Text;
-            set => labelDirectory.Text = value;
+            get => labelFolder.Text;
+            set => labelFolder.Text = value;
         }
 
         private readonly IPresenter presenter;
@@ -60,7 +60,7 @@ namespace MandelbrotSet.PropertiesForm
                 return false;
             }
 
-            if (labelDirectory.Text.Length == 0)
+            if (labelFolder.Text.Length == 0)
             {
                 MessageBox.Show("Must choose a directory!");
                 return false;
@@ -87,7 +87,7 @@ namespace MandelbrotSet.PropertiesForm
 
                 if (result == DialogResult.OK && !String.IsNullOrWhiteSpace(dialog.SelectedPath))
                 {
-                    Directory = dialog.SelectedPath;
+                    Folder = dialog.SelectedPath;
                 }
             }
         }
