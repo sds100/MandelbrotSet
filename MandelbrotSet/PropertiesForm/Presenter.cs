@@ -36,7 +36,11 @@ namespace MandelbrotSet.PropertiesForm
                     CalculateAxisLengths(form.Magnification),
                     form.FocusPoint);
 
-                MandelbrotSetBitmap.ExportImageAsync(path, bitmapSize, imageInfo);
+                MandelbrotSetBitmap.ExportImageAsync(
+                path,
+                    bitmapSize,
+                    imageInfo,
+                    form.iExportImage);
             }
         }
 

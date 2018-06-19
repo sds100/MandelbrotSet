@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MandelbrotSet
 {
     /// <summary>
-    /// Where Mandelbrot Sets are drawn
+    /// Where Mandelbrot Sets are rendered
     /// </summary>
     public static class MandelbrotSetBitmap
     {
@@ -32,15 +32,15 @@ namespace MandelbrotSet
         /// <param name="bitmapSize">The size the final bitmap should be</param>
         /// <param name="imageInfo">The plane to base all calculations off.</param>
         /// <returns>A bitmap representation of a Mandelbrot Set</returns>
-        public static Bitmap Create(Size bitmapSize, ImageInfo imageInfo)
+        public static Bitmap Create(Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar)
         {
-            int bitmapWidth = bitmapSize.Width;
-            int bitmapHeight = bitmapSize.Height;
+            int width = bitmapSize.Width;
+            int height = bitmapSize.Height;
 
             /* Bitmap objects can't be used across multiple tasks so a primitive 2D Color array
              * is used which will then be converted to a Bitmap object.
             */
-            var bitmapRepresentation = new Color[bitmapWidth, bitmapHeight];
+            var bitmapRepresentation = new Color[width, height];
 
             //The next row which should be calculated
             int nextRow = 0;
@@ -56,6 +56,11 @@ namespace MandelbrotSet
                     {
                         int thisRow = nextRow;
                         nextRow++;
+
+                        if (progressBar != null)
+                        {
+                            progressBar.OnProgress(CalculatePercent(height, thisRow));
+                        }
 
                         //iterate through each column in the row.
                         for (int column = 0; column < bitmapSize.Width; column++)
@@ -82,9 +87,9 @@ namespace MandelbrotSet
             }
 
             //check if all rows have been calculated.
-            for (int row = 0; row < bitmapHeight; row++)
+            for (int row = 0; row < height; row++)
             {
-                for (int column = 0; column < bitmapWidth; column++)
+                for (int column = 0; column < width; column++)
                 {
                     if (bitmapRepresentation[column, row].A != 255)
                     {
@@ -94,7 +99,7 @@ namespace MandelbrotSet
             }
 
             //convert the 2D Color array into a Bitmap object.
-            var bitmap = new Bitmap(bitmapWidth, bitmapHeight);
+            var bitmap = new Bitmap(width, height);
 
             for (int column = 0; column < bitmapSize.Width; column++)
             {
@@ -112,16 +117,23 @@ namespace MandelbrotSet
             return bitmap;
         }
 
-        public static async void ExportImageAsync(string path, Size bitmapSize, ImageInfo imageInfo)
+        public static async void ExportImageAsync(
+         string path,
+         Size bitmapSize,
+         ImageInfo imageInfo,
+         IExportImage iExportImage)
         {
             await Task.Run(() =>
             {
-                var bitmap = Create(bitmapSize, imageInfo);
+                var bitmap = Create(bitmapSize, imageInfo, iExportImage.ProgressBar);
 
-                if (bitmap != null)
-                {
-                    bitmap.Save(path);
-                }
+                iExportImage.ProgressBar.OnSaveStart();
+
+                bitmap.Save(path);
+
+                bitmap.Dispose();
+
+                iExportImage.OnExportFinished(path);
             });
         }
 
@@ -180,6 +192,11 @@ namespace MandelbrotSet
             {
                 return Color.Black;
             }
+        }
+
+        private static int CalculatePercent(int totalRows, int currentRow)
+        {
+            return (int)Math.Round(((float)currentRow / totalRows) * 100);
         }
     }
 }

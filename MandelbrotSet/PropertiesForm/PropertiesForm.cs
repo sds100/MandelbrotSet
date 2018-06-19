@@ -5,7 +5,7 @@ using System.IO;
 
 namespace MandelbrotSet.PropertiesForm
 {
-    public partial class PropertiesForm : Form, IForm
+    public partial class PropertiesForm : Form, IForm, IProgressBar, IExportImage
     {
         public Size BitmapSize => new Size((int)numUpDownWidth.Value, (int)numUpDownHeight.Value);
 
@@ -36,6 +36,10 @@ namespace MandelbrotSet.PropertiesForm
             set => labelFolder.Text = value;
         }
 
+        public IProgressBar ProgressBar => this;
+
+        public IExportImage iExportImage => this;
+
         private readonly IPresenter presenter;
 
         public PropertiesForm(MainForm.IPresenter mainFormPresenter)
@@ -61,9 +65,15 @@ namespace MandelbrotSet.PropertiesForm
                 return false;
             }
 
-            if (String.IsNullOrWhiteSpace(Folder) || String.IsNullOrWhiteSpace(FileName))
+            if (String.IsNullOrWhiteSpace(Folder))
             {
                 MessageBox.Show("Must choose a directory!");
+                return false;
+            }
+
+            if (String.IsNullOrWhiteSpace(FileName))
+            {
+                MessageBox.Show("Must create a file name!");
                 return false;
             }
 
@@ -108,6 +118,43 @@ namespace MandelbrotSet.PropertiesForm
         {
             Folder = "A:\\Seth\\Pictures\\MandelbrotSets";
             textBoxFileName.Text = "test";
+        }
+
+        public void OnProgress(int percent)
+        {
+            //to prevent the progressBar from being accessed on a different thread
+            //it was created on
+            this.Invoke(new MethodInvoker(delegate
+            {
+                labelProgress.Text = $"Drawn {percent}%";
+                progressBar.Value = percent;
+            }));
+        }
+
+        public void OnExportFinished(string path)
+        {
+            //to prevent the progressBar from being accessed on a different thread
+            //it was created on
+            this.Invoke(new MethodInvoker(delegate
+            {
+                progressBar.Value = 0;
+                labelProgress.Text = "";
+
+                MessageBox.Show(
+                this,
+                text: path,
+                caption: "Export Finished"
+                );
+            }));
+        }
+
+        public void OnSaveStart()
+        {
+            Console.WriteLine("onsavestart");
+            this.Invoke(new MethodInvoker(delegate
+            {
+                labelProgress.Text = "Saving to disk... This will take a long time depending on the resolution of the image";
+            }));
         }
     }
 }

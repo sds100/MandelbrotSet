@@ -10,6 +10,7 @@ namespace MandelbrotSet.PropertiesForm
         PointD FocusPoint { get; set; }
         String FileName { get; }
         String Folder { get; set; }
+        IExportImage iExportImage { get; }
 
         bool AreOptionsValid();
     }

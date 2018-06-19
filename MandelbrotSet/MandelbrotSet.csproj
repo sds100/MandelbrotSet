@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AxisLengths.cs" />
+    <Compile Include="IExportImage.cs" />
+    <Compile Include="IProgressBar.cs" />
     <Compile Include="PropertiesForm\PropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>

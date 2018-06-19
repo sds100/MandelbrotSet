@@ -50,6 +50,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.buttonApply = new System.Windows.Forms.Button();
             this.buttonDebug = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.labelProgress = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownMagnification)).BeginInit();
@@ -144,8 +146,8 @@
             // 
             // buttonExport
             // 
-            this.buttonExport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.buttonExport.Location = new System.Drawing.Point(128, 272);
+            this.buttonExport.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonExport.Location = new System.Drawing.Point(147, 307);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(75, 23);
             this.buttonExport.TabIndex = 9;
@@ -166,7 +168,7 @@
             // 
             this.labelFolder.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelFolder.AutoSize = true;
-            this.labelFolder.Location = new System.Drawing.Point(72, 237);
+            this.labelFolder.Location = new System.Drawing.Point(71, 237);
             this.labelFolder.Margin = new System.Windows.Forms.Padding(5);
             this.labelFolder.Name = "labelFolder";
             this.labelFolder.Size = new System.Drawing.Size(128, 13);
@@ -176,7 +178,7 @@
             // buttonChooseFolder
             // 
             this.buttonChooseFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonChooseFolder.Location = new System.Drawing.Point(12, 272);
+            this.buttonChooseFolder.Location = new System.Drawing.Point(12, 307);
             this.buttonChooseFolder.Name = "buttonChooseFolder";
             this.buttonChooseFolder.Size = new System.Drawing.Size(101, 23);
             this.buttonChooseFolder.TabIndex = 12;
@@ -294,13 +296,29 @@
             // 
             // buttonDebug
             // 
-            this.buttonDebug.Location = new System.Drawing.Point(287, 272);
+            this.buttonDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDebug.Location = new System.Drawing.Point(287, 307);
             this.buttonDebug.Name = "buttonDebug";
             this.buttonDebug.Size = new System.Drawing.Size(75, 23);
             this.buttonDebug.TabIndex = 26;
             this.buttonDebug.Text = "Debug";
             this.buttonDebug.UseVisualStyleBackColor = true;
             this.buttonDebug.Click += new System.EventHandler(this.ButtonDebug_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(12, 261);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(350, 17);
+            this.progressBar.TabIndex = 27;
+            // 
+            // labelProgress
+            // 
+            this.labelProgress.AutoSize = true;
+            this.labelProgress.Location = new System.Drawing.Point(11, 281);
+            this.labelProgress.Name = "labelProgress";
+            this.labelProgress.Size = new System.Drawing.Size(0, 13);
+            this.labelProgress.TabIndex = 28;
             // 
             // PropertiesForm
             // 
@@ -309,7 +327,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(374, 307);
+            this.ClientSize = new System.Drawing.Size(374, 342);
+            this.Controls.Add(this.labelProgress);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonDebug);
             this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.label7);
@@ -368,5 +388,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.Button buttonDebug;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label labelProgress;
     }
 }
