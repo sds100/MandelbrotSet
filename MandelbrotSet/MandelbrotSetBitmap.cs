@@ -120,7 +120,7 @@ namespace MandelbrotSet
 
         public static Bitmap CreateNew(Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar)
         {
-            Bitmap bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height, PixelFormat.Format24bppRgb);
+            Bitmap bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height, PixelFormat.Format32bppRgb);
 
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
@@ -212,7 +212,7 @@ namespace MandelbrotSet
                         color = Color.Black;
                     }
 
-                    int i = ((row * bitmapWidth) + column) * 3;
+                    int i = ((row * bitmapWidth) + column) * 4;
 
                     pixels[i] = color.B;
                     pixels[i + 1] = color.G;
