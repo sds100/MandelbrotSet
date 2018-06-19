@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -117,6 +118,29 @@ namespace MandelbrotSet
             return bitmap;
         }
 
+        public static Bitmap CreateNew(Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar)
+        {
+            Bitmap bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height, PixelFormat.Format24bppRgb);
+
+            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
+            IntPtr pointer = bitmapData.Scan0;
+
+            int size = Math.Abs(bitmapData.Stride) * bitmap.Height;
+
+            byte[] pixels = new byte[size];
+
+            Marshal.Copy(pointer, pixels, 0, size);
+
+            CalculatePixels(pixels, bitmapSize, imageInfo, 0, bitmapSize.Height);
+
+            Marshal.Copy(pixels, 0, pointer, size);
+
+            bitmap.UnlockBits(bitmapData);
+
+            return bitmap;
+        }
+
         public static async void ExportImageAsync(
          string path,
          Size bitmapSize,
@@ -135,6 +159,66 @@ namespace MandelbrotSet
 
                 iExportImage.OnExportFinished(path);
             });
+        }
+
+        private static void CalculatePixels(byte[] pixels, Size bitmapSize, ImageInfo imageInfo, int startRow, int endRow)
+        {
+            double axisWidth = imageInfo.AxisWidth;
+            double planeHeight = imageInfo.AxisHeight;
+
+            var focusPoint = imageInfo.FocusPoint;
+
+            int bitmapWidth = bitmapSize.Width;
+            int bitmapHeight = bitmapSize.Height;
+
+            /* converts the pixel coordinate to the equivalent coordinate on the given 
+             * portion of the complex plane. */
+
+            for (int row = startRow; row < endRow; row++)
+            {
+                for (int column = 0; column < bitmapSize.Width; column++)
+                {
+                    // the real part of C will be the X coordinate
+                    double c_real = ((column - bitmapWidth / 2) * axisWidth / bitmapWidth)
+                        + focusPoint.X;
+
+                    // the imaginary part of C will be the Y coordinate
+                    double c_im = (-(row - bitmapHeight / 2) * planeHeight / bitmapWidth)
+                        + focusPoint.Y;
+
+                    double z_real = 0;
+                    double z_im = 0;
+
+                    int iteration = 0;
+
+                    while (z_real * z_real + z_im * z_im < 4 && iteration < MAX_ITERATIONS)
+                    {
+                        double z_real_tmp = z_real * z_real - (z_im * z_im) + c_real;
+
+                        z_im = 2 * z_real * z_im + c_im;
+                        z_real = z_real_tmp;
+
+                        iteration++;
+                    }
+
+                    Color color;
+
+                    if (iteration < MAX_ITERATIONS)
+                    {
+                        color = ColorHelper.BLUE_BROWN[iteration % ColorHelper.BLUE_BROWN.Length];
+                    }
+                    else
+                    {
+                        color = Color.Black;
+                    }
+
+                    int i = ((row * bitmapWidth) + column) * 3;
+
+                    pixels[i] = color.B;
+                    pixels[i + 1] = color.G;
+                    pixels[i + 2] = color.R;
+                }
+            }
         }
 
         /// <summary>
