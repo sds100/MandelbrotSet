@@ -68,7 +68,7 @@ namespace MandelbrotSet
             {
                 var bitmap = Render(bitmapSize, imageInfo, iExportImage.ProgressBar);
 
-                iExportImage.ProgressBar.OnSaveStart();
+                iExportImage.OnSaveStart();
 
                 bitmap.Save(path);
 
