@@ -37,6 +37,7 @@ namespace MandelbrotSet.MainForm
             this.labelHeight = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonExport = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +73,8 @@ namespace MandelbrotSet.MainForm
             // 
             // labelTime
             // 
+            this.labelTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTime.AutoSize = true;
             this.labelTime.Location = new System.Drawing.Point(12, 9);
             this.labelTime.Name = "labelTime";
@@ -85,7 +88,7 @@ namespace MandelbrotSet.MainForm
             this.labelWidth.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelWidth.Location = new System.Drawing.Point(54, 0);
             this.labelWidth.Name = "labelWidth";
-            this.labelWidth.Size = new System.Drawing.Size(38, 13);
+            this.labelWidth.Size = new System.Drawing.Size(38, 16);
             this.labelWidth.TabIndex = 6;
             this.labelWidth.Text = "Width:";
             // 
@@ -95,7 +98,7 @@ namespace MandelbrotSet.MainForm
             this.labelHeight.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelHeight.Location = new System.Drawing.Point(98, 0);
             this.labelHeight.Name = "labelHeight";
-            this.labelHeight.Size = new System.Drawing.Size(38, 13);
+            this.labelHeight.Size = new System.Drawing.Size(38, 16);
             this.labelHeight.TabIndex = 7;
             this.labelHeight.Text = "Height";
             // 
@@ -104,20 +107,22 @@ namespace MandelbrotSet.MainForm
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.labelHeight, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelVersion, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelWidth, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar, 3, 0);
             this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 540);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 537);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(10, 3, 3, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(139, 13);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(385, 16);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
             // buttonExport
@@ -130,6 +135,14 @@ namespace MandelbrotSet.MainForm
             this.buttonExport.Text = "Export";
             this.buttonExport.UseVisualStyleBackColor = true;
             this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(142, 3);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(240, 10);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar.TabIndex = 10;
             // 
             // MainForm
             // 
@@ -163,6 +176,7 @@ namespace MandelbrotSet.MainForm
         private System.Windows.Forms.Label labelHeight;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
