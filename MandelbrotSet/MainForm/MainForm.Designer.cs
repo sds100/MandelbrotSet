@@ -36,7 +36,6 @@ namespace MandelbrotSet.MainForm
             this.labelWidth = new System.Windows.Forms.Label();
             this.labelHeight = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonExport = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -125,17 +124,6 @@ namespace MandelbrotSet.MainForm
             this.tableLayoutPanel1.Size = new System.Drawing.Size(385, 16);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
-            // buttonExport
-            // 
-            this.buttonExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonExport.Location = new System.Drawing.Point(697, 530);
-            this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(75, 23);
-            this.buttonExport.TabIndex = 9;
-            this.buttonExport.Text = "Export";
-            this.buttonExport.UseVisualStyleBackColor = true;
-            this.buttonExport.Click += new System.EventHandler(this.ButtonExport_Click);
-            // 
             // progressBar
             // 
             this.progressBar.Location = new System.Drawing.Point(142, 3);
@@ -149,7 +137,6 @@ namespace MandelbrotSet.MainForm
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.pictureBox);
@@ -175,7 +162,6 @@ namespace MandelbrotSet.MainForm
         private System.Windows.Forms.Label labelWidth;
         private System.Windows.Forms.Label labelHeight;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.ProgressBar progressBar;
     }
 }
