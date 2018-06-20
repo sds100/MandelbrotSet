@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MandelbrotSet
+﻿namespace MandelbrotSet
 {
     /// <summary>
     /// Stores necessary information to recreate an image.
