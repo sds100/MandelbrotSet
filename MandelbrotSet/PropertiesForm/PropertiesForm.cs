@@ -137,7 +137,6 @@ namespace MandelbrotSet.PropertiesForm
             //it was created on
             this.Invoke(new MethodInvoker(delegate
             {
-                progressBar.Value = 0;
                 labelProgress.Text = "";
 
                 MessageBox.Show(
@@ -150,10 +149,17 @@ namespace MandelbrotSet.PropertiesForm
 
         public void OnSaveStart()
         {
-            Console.WriteLine("onsavestart");
             this.Invoke(new MethodInvoker(delegate
             {
                 labelProgress.Text = "Saving to disk... This will take a long time depending on the resolution of the image";
+            }));
+        }
+
+        public void OnProgressFinish()
+        {
+            this.Invoke(new MethodInvoker(delegate
+            {
+                progressBar.Value = 0;
             }));
         }
     }

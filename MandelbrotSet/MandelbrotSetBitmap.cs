@@ -28,6 +28,8 @@ namespace MandelbrotSet
         /// </summary>
         private static int COLORS_PER_PIXEL = 4;
 
+        private static int CalculatedRows = 0;
+
         /// <summary>
         /// Render the Mandelbrot Set
         /// </summary>
@@ -38,7 +40,11 @@ namespace MandelbrotSet
         public static Bitmap Render(Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar)
         {
             var bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height, PixelFormat.Format32bppRgb);
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
+            var rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+
+            var bitmapData = bitmap.LockBits(rect, ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
             var pointer = bitmapData.Scan0;
 
             int size = Math.Abs(bitmapData.Stride) * bitmap.Height;
@@ -47,13 +53,16 @@ namespace MandelbrotSet
 
             Marshal.Copy(pointer, pixels, 0, size);
 
-            var actions = CreateActions(pixels, bitmapSize, imageInfo);
-            
+            var actions = CreateActions(pixels, bitmapSize, imageInfo, progressBar);
+
             Parallel.Invoke(actions);
 
             Marshal.Copy(pixels, 0, pointer, size);
 
             bitmap.UnlockBits(bitmapData);
+
+            progressBar.OnProgressFinish();
+            CalculatedRows = 0;
 
             return bitmap;
         }
@@ -78,33 +87,57 @@ namespace MandelbrotSet
             });
         }
 
-        private static Action[] CreateActions(byte[] pixels, Size bitmapSize, ImageInfo imageInfo)
+        private static Action[] CreateActions(byte[] pixels, Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar)
         {
             var actions = new List<Action>();
 
-            int lastEndRow = 0;
+            int totalRows = bitmapSize.Height;
+            int chunkSize = totalRows / CORE_COUNT;
 
             for (int i = 0; i < CORE_COUNT; i++)
             {
-                int startRow = lastEndRow;
-                int endRow = startRow + bitmapSize.Height / CORE_COUNT;
+                int startRow;
 
-                actions.Add(() => CalculatePixels(pixels, bitmapSize, imageInfo, startRow, endRow));
+                if (i == 0)
+                {
+                    startRow = 0;
+                }
+                else
+                {
+                    startRow = (chunkSize * i) + 1;
+                }
+
+                int endRow = chunkSize * (i + 1);
+
+                actions.Add(() => CalculatePixels(pixels, bitmapSize, imageInfo, startRow, endRow, totalRows, progressBar));
             }
 
             /* If there are some left over rows which won't be rendered because the number of rows won't necessarily
              * be divisible by the core count */
-            if (lastEndRow < bitmapSize.Height)
+            if (chunkSize * (CORE_COUNT + 1) < bitmapSize.Height)
             {
-                int startRow = lastEndRow;
+                int startRow = (chunkSize * CORE_COUNT) + 1;
                 int endRow = bitmapSize.Height;
-                actions.Add(() => CalculatePixels(pixels, bitmapSize, imageInfo, startRow, endRow));
+                actions.Add(() => CalculatePixels(pixels, bitmapSize, imageInfo, startRow, endRow, totalRows, progressBar));
             }
 
             return actions.ToArray();
         }
-        
-        private static void CalculatePixels(byte[] pixels, Size bitmapSize, ImageInfo imageInfo, int startRow, int endRow)
+
+        private static void OnCalculatedRow(IProgressBar progressBar, int totalRows)
+        {
+            CalculatedRows += 1;
+            progressBar.OnProgress(CalculatePercent(totalRows, CalculatedRows));
+        }
+
+        private static void CalculatePixels(
+            byte[] pixels,
+            Size bitmapSize,
+            ImageInfo imageInfo,
+            int startRow,
+            int endRow,
+            int totalRows,
+            IProgressBar progressBar)
         {
             double axisWidth = imageInfo.AxisWidth;
             double planeHeight = imageInfo.AxisHeight;
@@ -117,7 +150,7 @@ namespace MandelbrotSet
             /* converts the pixel coordinate to the equivalent coordinate on the given 
              * portion of the complex plane. */
 
-            for (int row = startRow; row < endRow; row++)
+            for (int row = startRow; row <= endRow; row++)
             {
                 for (int column = 0; column < bitmapSize.Width; column++)
                 {
@@ -161,12 +194,26 @@ namespace MandelbrotSet
                     pixels[i + 1] = color.G;
                     pixels[i + 2] = color.R;
                 }
+
+                if (row % 10 == 0)
+                {
+                    OnCalculatedRow(progressBar, totalRows);
+                }
             }
         }
 
         private static int CalculatePercent(int totalRows, int currentRow)
         {
-            return (int)Math.Round(((float)currentRow / totalRows) * 100);
+            int percent = (int)Math.Round(((float)currentRow / totalRows) * 100);
+
+            if (percent > 100)
+            {
+                return 100;
+            }
+            else
+            {
+                return percent;
+            }
         }
     }
 }

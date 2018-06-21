@@ -9,10 +9,11 @@ namespace MandelbrotSet.MainForm
 {
     public interface IForm
     {
+        IProgressBar ProgressBar { get; }
         Bitmap MandelbrotSet { set; }
         long CalculationTime { set; }
         double AxisWidth { set; }
-        double AxisHeight { set;}
+        double AxisHeight { set; }
 
         void OnImageChange(ImageInfo imageInfo);
     }

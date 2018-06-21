@@ -7,7 +7,7 @@ namespace MandelbrotSet.MainForm
     /// <summary>
     /// The main Form. Uses MVP pattern.
     /// </summary>
-    public partial class MainForm : Form, IForm
+    public partial class MainForm : Form, IForm, IProgressBar
     {
         /// <summary>
         /// Amount to change the size of the <see cref="selectionRectangle"/> by in pixels.
@@ -46,6 +46,8 @@ namespace MandelbrotSet.MainForm
         /// Calculates the aspect-ratio of <see cref="pictureBox"/> 
         /// </summary>
         private double AspectRatio => (double)pictureBox.Width / pictureBox.Height;
+
+        public IProgressBar ProgressBar => this;
 
         /// <summary>
         /// The rectangle which follows the cursor. It is used to select where the user wants to
@@ -217,14 +219,25 @@ namespace MandelbrotSet.MainForm
             pictureBox.Refresh();
         }
 
-        private void ButtonExport_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private double CalculateMagnification(AxisLengths axisLengths)
         {
             return Math.Round(ImageInfo.DEFAULT_AXIS_LENGTHS.X / axisLengths.X, 5);
+        }
+
+        public void OnProgress(int percent)
+        {
+            this.Invoke(new MethodInvoker(delegate
+            {
+                progressBar.Value = percent;
+            }));
+        }
+
+        public void OnProgressFinish()
+        {
+            this.Invoke(new MethodInvoker(delegate
+            {
+                progressBar.Value = 0;
+            }));
         }
     }
 }
