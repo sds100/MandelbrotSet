@@ -28,6 +28,11 @@ namespace MandelbrotSet
         /// </summary>
         private static int COLORS_PER_PIXEL = 4;
 
+        /// <summary>
+        /// The interval at which the percentage progress should be calculated
+        /// </summary>
+        private static int REPORT_ROW_INTERVAL = 10;
+
         private static int CalculatedRows = 0;
 
         /// <summary>
@@ -165,7 +170,7 @@ namespace MandelbrotSet
 
         private static void OnCalculatedRow(IProgressBar progressBar, int totalRows)
         {
-            CalculatedRows += 1;
+            CalculatedRows += REPORT_ROW_INTERVAL;
             progressBar.OnProgress(CalculatePercent(totalRows, CalculatedRows));
         }
 
@@ -235,7 +240,7 @@ namespace MandelbrotSet
                     pixels[i + 2] = color.R;
                 }
 
-                if (reportProgress && row % 10 == 0)
+                if (reportProgress && row % REPORT_ROW_INTERVAL == 0)
                 {
                     OnCalculatedRow(progressBar, totalRows);
                 }
@@ -244,7 +249,7 @@ namespace MandelbrotSet
 
         private static int CalculatePercent(int totalRows, int currentRow)
         {
-            int percent = (int)Math.Round(((float)currentRow / totalRows) * 1000);
+            int percent = (int)Math.Round(((float)currentRow / totalRows) * 100);
 
             return percent;
         }
