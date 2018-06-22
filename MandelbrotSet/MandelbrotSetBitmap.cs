@@ -80,12 +80,10 @@ namespace MandelbrotSet
         }
 
         /// <summary>
-        /// 
+        /// Export a portion of the Mandelbrot Set to a desired path.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="bitmapSize"></param>
-        /// <param name="imageInfo"></param>
-        /// <param name="iExportImage"></param>
+        /// <param name="path">The path to the .png file.</param>
+        /// <param name="bitmapSize">The size of the bitmap to create</param>
         public static async void ExportImageAsync(
          string path,
          Size bitmapSize,
@@ -128,7 +126,7 @@ namespace MandelbrotSet
                 }
                 else
                 {
-                    startRow = (chunkSize * i) + 1;
+                    startRow = (chunkSize * i);
                 }
 
                 int endRow = chunkSize * (i + 1);
@@ -146,9 +144,9 @@ namespace MandelbrotSet
 
             /* If there are some left over rows which won't be rendered because the number of rows won't necessarily
              * be divisible by the core count */
-            if (chunkSize * (CORE_COUNT + 1) < bitmapSize.Height)
+            if (chunkSize * CORE_COUNT < bitmapSize.Height)
             {
-                int startRow = (chunkSize * CORE_COUNT) + 1;
+                int startRow = (chunkSize * CORE_COUNT);
                 int endRow = bitmapSize.Height;
 
                 actions.Add(() => CalculatePixels(
@@ -192,7 +190,7 @@ namespace MandelbrotSet
             /* converts the pixel coordinate to the equivalent coordinate on the given 
              * portion of the complex plane. */
 
-            for (int row = startRow; row <= endRow; row++)
+            for (int row = startRow; row < endRow; row++)
             {
                 for (int column = 0; column < bitmapSize.Width; column++)
                 {
