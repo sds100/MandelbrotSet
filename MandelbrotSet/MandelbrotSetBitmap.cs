@@ -67,6 +67,15 @@ namespace MandelbrotSet
             return bitmap;
         }
 
+        /// <summary>
+        /// Overload for <see cref="Render(Size, ImageInfo, IProgressBar, bool)"/>.
+        /// Use if a progress reporting isn't required
+        /// </summary>
+        public static Bitmap Render(Size bitmapSize, ImageInfo imageInfo)
+        {
+            return Render(bitmapSize, imageInfo, progressBar: null, reportProgress: false);
+        }
+
         public static async void ExportImageAsync(
          string path,
          Size bitmapSize,
