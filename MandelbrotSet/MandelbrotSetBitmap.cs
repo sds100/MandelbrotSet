@@ -37,7 +37,7 @@ namespace MandelbrotSet
         /// <param name="imageInfo">The information required to render the desired portion of the Mandelbrot Set</param>
         /// <param name="progressBar">The <see cref="IProgressBar"/> to use.</param>
         /// <returns></returns>
-        public static Bitmap Render(Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar)
+        public static Bitmap Render(Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar, bool reportProgress)
         {
             var bitmap = new Bitmap(bitmapSize.Width, bitmapSize.Height, PixelFormat.Format32bppRgb);
 
@@ -53,7 +53,7 @@ namespace MandelbrotSet
 
             Marshal.Copy(pointer, pixels, 0, size);
 
-            var actions = CreateActions(pixels, bitmapSize, imageInfo, progressBar);
+            var actions = CreateActions(pixels, bitmapSize, imageInfo, progressBar, reportProgress);
 
             Parallel.Invoke(actions);
 
@@ -75,7 +75,7 @@ namespace MandelbrotSet
         {
             await Task.Run(() =>
             {
-                var bitmap = Render(bitmapSize, imageInfo, iExportImage.ProgressBar);
+                var bitmap = Render(bitmapSize, imageInfo, iExportImage.ProgressBar, reportProgress: true);
 
                 iExportImage.OnSaveStart();
 
@@ -87,7 +87,12 @@ namespace MandelbrotSet
             });
         }
 
-        private static Action[] CreateActions(byte[] pixels, Size bitmapSize, ImageInfo imageInfo, IProgressBar progressBar)
+        private static Action[] CreateActions(
+            byte[] pixels, 
+            Size bitmapSize,
+            ImageInfo imageInfo,
+            IProgressBar progressBar,
+            bool reportProgress)
         {
             var actions = new List<Action>();
 
@@ -109,7 +114,15 @@ namespace MandelbrotSet
 
                 int endRow = chunkSize * (i + 1);
 
-                actions.Add(() => CalculatePixels(pixels, bitmapSize, imageInfo, startRow, endRow, totalRows, progressBar));
+                actions.Add(() => CalculatePixels(
+                    pixels,
+                    bitmapSize,
+                    imageInfo,
+                    startRow,
+                    endRow,
+                    totalRows,
+                    progressBar,
+                    reportProgress));
             }
 
             /* If there are some left over rows which won't be rendered because the number of rows won't necessarily
@@ -118,7 +131,16 @@ namespace MandelbrotSet
             {
                 int startRow = (chunkSize * CORE_COUNT) + 1;
                 int endRow = bitmapSize.Height;
-                actions.Add(() => CalculatePixels(pixels, bitmapSize, imageInfo, startRow, endRow, totalRows, progressBar));
+
+                actions.Add(() => CalculatePixels(
+                    pixels,
+                    bitmapSize,
+                    imageInfo,
+                    startRow,
+                    endRow,
+                    totalRows,
+                    progressBar,
+                    reportProgress));
             }
 
             return actions.ToArray();
@@ -137,7 +159,8 @@ namespace MandelbrotSet
             int startRow,
             int endRow,
             int totalRows,
-            IProgressBar progressBar)
+            IProgressBar progressBar,
+            bool reportProgress)
         {
             double axisWidth = imageInfo.AxisWidth;
             double planeHeight = imageInfo.AxisHeight;
@@ -195,7 +218,7 @@ namespace MandelbrotSet
                     pixels[i + 2] = color.R;
                 }
 
-                if (row % 10 == 0)
+                if (reportProgress && row % 10 == 0)
                 {
                     OnCalculatedRow(progressBar, totalRows);
                 }

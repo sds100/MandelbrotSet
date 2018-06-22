@@ -127,7 +127,7 @@ namespace MandelbrotSet.MainForm
 
             await Task.Run(() =>
             {
-                var bitmap = MandelbrotSetBitmap.Render(bitmapSize, imageInfo, Form.ProgressBar);
+                var bitmap = MandelbrotSetBitmap.Render(bitmapSize, imageInfo, Form.ProgressBar, reportProgress: false);
 
                 if (bitmap != null)
                 {
