@@ -112,6 +112,7 @@ namespace MandelbrotSet.MainForm
         /// of a Mandelbrot Set</param>
         public async void DrawImageAsync(Size bitmapSize, ImageInfo imageInfo, bool saveToHistory)
         {
+            Form.OnRenderStart();
             CurrentBitmapSize = bitmapSize;
 
             if (saveToHistory)
@@ -127,7 +128,7 @@ namespace MandelbrotSet.MainForm
 
             await Task.Run(() =>
             {
-                var bitmap = MandelbrotSetBitmap.Render(bitmapSize, imageInfo, Form.ProgressBar, reportProgress: false);
+                var bitmap = MandelbrotSetBitmap.Render(bitmapSize, imageInfo);
 
                 if (bitmap != null)
                 {
@@ -144,6 +145,8 @@ namespace MandelbrotSet.MainForm
             Form.AxisHeight = imageInfo.AxisHeight;
 
             Form.OnImageChange(imageInfo);
+
+            Form.OnRenderFinish();
         }
 
         /// <summary>

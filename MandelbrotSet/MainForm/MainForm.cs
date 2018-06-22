@@ -7,7 +7,7 @@ namespace MandelbrotSet.MainForm
     /// <summary>
     /// The main Form. Uses MVP pattern.
     /// </summary>
-    public partial class MainForm : Form, IForm, IProgressBar
+    public partial class MainForm : Form, IForm
     {
         /// <summary>
         /// Amount to change the size of the <see cref="selectionRectangle"/> by in pixels.
@@ -46,9 +46,7 @@ namespace MandelbrotSet.MainForm
         /// Calculates the aspect-ratio of <see cref="pictureBox"/> 
         /// </summary>
         private double AspectRatio => (double)pictureBox.Width / pictureBox.Height;
-
-        public IProgressBar ProgressBar => this;
-
+        
         /// <summary>
         /// The rectangle which follows the cursor. It is used to select where the user wants to
         /// zoom into next.
@@ -67,7 +65,7 @@ namespace MandelbrotSet.MainForm
 
         private readonly IPresenter presenter;
 
-        private PropertiesForm.PropertiesForm exportForm;
+        private PropertiesForm.PropertiesForm propertiesForm;
 
         public MainForm()
         {
@@ -80,10 +78,25 @@ namespace MandelbrotSet.MainForm
                 size: new Size(pictureBox.Width / 10, pictureBox.Height / 10));
         }
 
+        public void OnRenderStart()
+        {
+            labelRendering.Visible = true;
+        }
+
+        public void OnRenderFinish()
+        {
+            labelRendering.Visible = false;
+        }
+
+        /// <summary>
+        /// Implemented from <see cref="IForm"/>
+        /// Update the information shown in <see cref="PropertiesForm"/> to match the new image being shown
+        /// </summary>
+        /// <param name="imageInfo"></param>
         public void OnImageChange(ImageInfo imageInfo)
         {
-            exportForm.Magnification = CalculateMagnification(imageInfo.AxisLengths);
-            exportForm.FocusPoint = imageInfo.FocusPoint;
+            propertiesForm.Magnification = CalculateMagnification(imageInfo.AxisLengths);
+            propertiesForm.FocusPoint = imageInfo.FocusPoint;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -91,8 +104,8 @@ namespace MandelbrotSet.MainForm
             presenter.DrawInitialImage(pictureBox.Size);
             labelVersion.Text = $"Version: {Properties.Resources.Version}";
 
-            exportForm = new PropertiesForm.PropertiesForm(presenter);
-            exportForm.Show();
+            propertiesForm = new PropertiesForm.PropertiesForm(presenter);
+            propertiesForm.Show();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -222,22 +235,6 @@ namespace MandelbrotSet.MainForm
         private double CalculateMagnification(AxisLengths axisLengths)
         {
             return Math.Round(ImageInfo.DEFAULT_AXIS_LENGTHS.X / axisLengths.X, 5);
-        }
-
-        public void OnProgress(int percent)
-        {
-            this.Invoke(new MethodInvoker(delegate
-            {
-                progressBar.Value = percent;
-            }));
-        }
-
-        public void OnProgressFinish()
-        {
-            this.Invoke(new MethodInvoker(delegate
-            {
-                progressBar.Value = 0;
-            }));
         }
     }
 }

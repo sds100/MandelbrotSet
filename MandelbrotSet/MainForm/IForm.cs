@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace MandelbrotSet.MainForm
 {
     public interface IForm
     {
-        IProgressBar ProgressBar { get; }
         Bitmap MandelbrotSet { set; }
         long CalculationTime { set; }
         double AxisWidth { set; }
         double AxisHeight { set; }
+        
+        void OnRenderStart();
+        void OnRenderFinish();
 
+        /// <summary>
+        /// Executed when the image being shown to the user changes.
+        /// </summary>
+        /// <param name="imageInfo">The <see cref="ImageInfo"/> of the new image</param>
         void OnImageChange(ImageInfo imageInfo);
     }
 }

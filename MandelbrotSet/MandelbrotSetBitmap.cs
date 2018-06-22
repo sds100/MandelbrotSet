@@ -61,8 +61,11 @@ namespace MandelbrotSet
 
             bitmap.UnlockBits(bitmapData);
 
-            progressBar.OnProgressFinish();
-            CalculatedRows = 0;
+            if (reportProgress)
+            {
+                progressBar.OnProgressFinish();
+                CalculatedRows = 0;
+            }
 
             return bitmap;
         }
@@ -76,6 +79,13 @@ namespace MandelbrotSet
             return Render(bitmapSize, imageInfo, progressBar: null, reportProgress: false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="bitmapSize"></param>
+        /// <param name="imageInfo"></param>
+        /// <param name="iExportImage"></param>
         public static async void ExportImageAsync(
          string path,
          Size bitmapSize,
@@ -97,7 +107,7 @@ namespace MandelbrotSet
         }
 
         private static Action[] CreateActions(
-            byte[] pixels, 
+            byte[] pixels,
             Size bitmapSize,
             ImageInfo imageInfo,
             IProgressBar progressBar,
