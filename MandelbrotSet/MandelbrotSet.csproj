@@ -71,12 +71,6 @@
     <Compile Include="MainForm\Presenter.cs" />
     <Compile Include="MandelbrotSetBitmap.cs" />
     <Compile Include="PointD.cs" />
-    <Compile Include="PreviewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PreviewForm.Designer.cs">
-      <DependentUpon>PreviewForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PropertiesForm\PropertiesForm.resx">
@@ -84,9 +78,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PreviewForm.resx">
-      <DependentUpon>PreviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
