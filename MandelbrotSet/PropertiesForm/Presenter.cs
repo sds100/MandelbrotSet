@@ -46,7 +46,8 @@ namespace MandelbrotSet.PropertiesForm
                 var axisLengths = CalculateAxisLengths(form.Magnification);
                 var imageInfo = new ImageInfo(axisLengths, form.FocusPoint);
 
-                mainFormPresenter.DrawImageAsync(mainFormPresenter.CurrentBitmapSize, imageInfo, true);
+                mainFormPresenter.SaveImageToHistory(imageInfo);
+                mainFormPresenter.DrawImageAsync(mainFormPresenter.CurrentBitmapSize, imageInfo);
             }
             catch (Exception) { }
         }

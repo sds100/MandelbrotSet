@@ -52,7 +52,7 @@ namespace MandelbrotSet.MainForm
             var imageInfo = new ImageInfo(ImageInfo.DEFAULT_AXIS_LENGTHS,
                                 ImageInfo.DEFAULT_FOCUS_POINT);
 
-            DrawImageAsync(bitmapSize, imageInfo, false);
+            DrawImageAsync(bitmapSize, imageInfo);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace MandelbrotSet.MainForm
         {
             var imageInfo = ImageInfoHistory.Last();
 
-            DrawImageAsync(newBitmapSize, imageInfo, false);
+            DrawImageAsync(newBitmapSize, imageInfo);
         }
 
         /// <summary>
@@ -82,7 +82,9 @@ namespace MandelbrotSet.MainForm
 
             var imageInfo = new ImageInfo(newAxisLengths, newFocusPoint);
 
-            DrawImageAsync(bitmapSize, imageInfo, true);
+            SaveImageToHistory(imageInfo);
+
+            DrawImageAsync(bitmapSize, imageInfo);
         }
 
         /// <summary>
@@ -92,17 +94,22 @@ namespace MandelbrotSet.MainForm
         /// <param name="bitmapSize">The size of the image to create</param>
         public void ShowPreviousPlane(Size bitmapSize)
         {
-            ImageInfoHistory.Remove(ImageInfoHistory.Last());
-            
-            if (ImageInfoHistory.Count == 0)
+            if (ImageInfoHistory.Count == 1)
             {
                 DrawInitialImage(bitmapSize);
             }
             else
             {
+                ImageInfoHistory.Remove(ImageInfoHistory.Last());
+
                 var imageInfo = ImageInfoHistory.Last();
-                DrawImageAsync(bitmapSize, imageInfo, false);
+                DrawImageAsync(bitmapSize, imageInfo);
             }
+        }
+
+        public void SaveImageToHistory(ImageInfo imageInfo)
+        {
+            ImageInfoHistory.Add(imageInfo);
         }
 
         /// <summary>
@@ -110,15 +117,10 @@ namespace MandelbrotSet.MainForm
         /// </summary>
         /// <param name="func">The function to invoke asynchronously which will return a bitmap
         /// of a Mandelbrot Set</param>
-        public async void DrawImageAsync(Size bitmapSize, ImageInfo imageInfo, bool saveToHistory)
+        public async void DrawImageAsync(Size bitmapSize, ImageInfo imageInfo)
         {
             Form.OnRenderStart();
             CurrentBitmapSize = bitmapSize;
-
-            if (saveToHistory)
-            {
-                ImageInfoHistory.Add(imageInfo);
-            }
 
             /*
              * get the current time which will be used to calculate how long it took to create and
