@@ -244,16 +244,9 @@ namespace MandelbrotSet
 
         private static int CalculatePercent(int totalRows, int currentRow)
         {
-            int percent = (int)Math.Round(((float)currentRow / totalRows) * 100);
+            int percent = (int)Math.Round(((float)currentRow / totalRows) * 1000);
 
-            if (percent > 100)
-            {
-                return 100;
-            }
-            else
-            {
-                return percent;
-            }
+            return percent;
         }
     }
 }
